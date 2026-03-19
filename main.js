@@ -1,9 +1,14 @@
 const { app, BrowserWindow, ipcMain } = require('electron/main')
 
+const saveFile = require('./fileSaver')
+
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 1080,
-        height: 720
+        height: 720,
+        webPreferences: {
+        preload: path.join(__dirname, 'preload.js')
+    }
     })
     win.loadFile('main.html')
     win.webContents.openDevTools()

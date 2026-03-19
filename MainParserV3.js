@@ -29,7 +29,7 @@ const blockParser = (inputString) => {
     
     if (inputString === "") {root = []}
 
-    let splitStringArray = inputString.split("\n");//Break into the HTML blocks
+    let splitStringArray = inputString.split("\n"); //Break into the HTML blocks
     root.length = 0
     let currentObject = {}
     let nestLevel = 0 
