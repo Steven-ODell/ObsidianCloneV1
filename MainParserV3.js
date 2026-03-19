@@ -4,6 +4,9 @@ import { inlineParser } from "./InlineParserV3.js";
 
 const inputBox = document.getElementById("main-editor-text-area");
 const outputDiv = document.getElementById("main-editor-div");
+const previewButton = document.getElementById("toggle-preview");
+const editorButton = document.getElementById("toggle-editor");
+
 let root = []
 
 const startingItems = [
@@ -59,3 +62,15 @@ const blockParser = (inputString) => {
     console.log("Tree is:\n" + JSON.stringify(root, null, 2))
     return root // send tree back to be sent the renderer
 }
+
+previewButton.addEventListener('click', () => {
+    inputBox.style.backgroundColor = 'transparent';
+    inputBox.style.color = 'transparent';
+    inputBox.style.zIndex = 0;
+})
+
+editorButton.addEventListener('click', () => {
+    inputBox.style.backgroundColor = 'rgb(19, 19, 19)';
+    inputBox.style.color = 'rgb(238, 238, 238)';
+    inputBox.style.zIndex = 2;
+})
