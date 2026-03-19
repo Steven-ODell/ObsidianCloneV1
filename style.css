@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(12, 12, 12);
+    margin: 0;
+    height: 100vh;
+}
+
+#side-tool-bar {
+    background-color: rgb(32, 32, 32);
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    max-width: 50px;
+    min-height: 100vh;
+    height: auto;
+    border-color: blueviolet;
+    border-style: solid;
+    border-left: 10px;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+
+#file-explorer {
+    background-color: rgb(28, 28, 28);
+    display: flex;
+    flex-grow: 0;
+    position: relative;
+    width: 15%;
+    max-width: 25%;
+    min-height: 100vh;
+    height: auto;
+    resize: horizontal;
+    overflow: auto;
+}
+
