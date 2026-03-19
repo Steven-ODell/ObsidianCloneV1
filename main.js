@@ -5,13 +5,13 @@ const createWindow = () => {
         width: 1080,
         height: 720
     })
-    
     win.loadFile('main.html')
+    win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
     createWindow()
-
+    
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
