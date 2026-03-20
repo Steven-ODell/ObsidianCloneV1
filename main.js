@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron/main')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron/main')
 
 const path = require('path')
 const {saveFile} = require('./file_management/fileSaver')
@@ -8,6 +8,7 @@ const createWindow = () => {
     const win = new BrowserWindow({
         width: 1080,
         height: 720,
+        // Initiate the preload when the window loads more details in preload
         webPreferences: {
         preload: path.join(__dirname, 'preload.js')
     }
@@ -17,11 +18,25 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
-    ipcMain.handle("save-file", (event, content) => {
-        return saveFile(content)
+    /* IPCMain handles are basically event listeners for the IPC Tunnel
+    when you set one up a handle allows the functions in that tunnel to
+    processes what comes through the tunnel and sends it back through with return
+    
+    essentially handles are taking the function called that needs system access and uses the 
+    ipc tunnel to understand the connection then allows browser to essentially directly 
+    talk to the system via Main.js. When a function is called like save-file in 
+    MainParserV3.js from a button it gets executed here. IPC preload was the tunnel to set
+    that up so main can talk to the specific browser calls*/
+    ipcMain.handle("save-file", (event, textAreaContent) => {
+        const result = saveFile(textAreaContent)
+        if (result === "duplicate") {
+            dialog.showMessageBox({ message: "A file with that title already exists." })
+            return "duplicate"
+        }
+        return result
     })
-    ipcMain.handle("read-file", (event, content) => {
-        return readFile(content)
+    ipcMain.handle("read-file", (event, fileName) => {
+        return readFile(fileName)
     })
     createWindow()
     

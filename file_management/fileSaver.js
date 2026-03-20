@@ -1,4 +1,6 @@
-const directoryFolder = '/Users/Steven/Desktop/Learning to Code 2026/JS/ElectronProjects/ObsidianCloneV1/TestVault'
+const { vaultPath } = require('../vaultConfig')
+
+const directoryFolder = vaultPath
 
 const fs = require('fs')
 const path = require('path')
@@ -14,7 +16,7 @@ const saveFile = (documentString) => {
         if (!(fs.existsSync(filePath))) { 
             fs.writeFile(filePath, documentString, (err) => { if (err) console.log(err) })
         }
-        else {return}
+        else {return "duplicate"}
         return cleanedTitle
     }
 }
