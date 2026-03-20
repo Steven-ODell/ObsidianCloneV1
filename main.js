@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron/main')
 
-const saveFile = require('./fileSaver')
+const path = require('path')
+const {saveFile} = require('./file_management/fileSaver')
+const {readFile} = require('./file_management/readFile')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -15,6 +17,12 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
+    ipcMain.handle("save-file", (event, content) => {
+        return saveFile(content)
+    })
+    ipcMain.handle("read-file", (event, content) => {
+        return readFile(content)
+    })
     createWindow()
     
     app.on('activate', () => {
