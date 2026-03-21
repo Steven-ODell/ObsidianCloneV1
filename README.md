@@ -13,7 +13,7 @@ So just to state upfront I am starting this with 7 weeks of coding experience. S
 - "FileExplorer" openable files
 - Vault config (just a path in a file now but will be settings input eventually)
 
-## list of features planned
+## List of features planned
 - AI Autocomplete for notes(Copilot for notes)
 - AI summary on right sidebar
 - AI plug in Local or API key
