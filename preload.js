@@ -5,4 +5,5 @@ contextBridge.exposeInMainWorld('api', {
     "save-file" is the name of the listener in Main.js */
     saveFile: (textAreaContent) => ipcRenderer.invoke('save-file', textAreaContent),
     readFile: (fileName) => ipcRenderer.invoke('read-file', fileName),
+    getVaultPath: (filePath) => ipcRenderer.invoke('get-vault-path', filePath),
 })

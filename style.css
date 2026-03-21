@@ -24,12 +24,12 @@ body {
     align-items: center;
 }
 
-#searchWrapper {
+#search-wrapper {
     position: relative;
     margin-left: 50px;
 }
 
-#fileSearchBarInput {
+#file-search-bar-input {
     border-radius: 15px;
     border: none;
     background-color: rgb(51, 51, 51);
@@ -40,7 +40,7 @@ body {
     padding-left: 30px;
 }
 
-#searchWrapper svg {
+#search-wrapper svg {
     position: absolute;
     left: 8px;
     top: 50%;
@@ -135,7 +135,7 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
     margin: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .file-explorer-tool-bar-button:hover {

@@ -27,6 +27,7 @@ app.whenReady().then(() => {
     talk to the system via Main.js. When a function is called like save-file in 
     MainParserV3.js from a button it gets executed here. IPC preload was the tunnel to set
     that up so main can talk to the specific browser calls*/
+    
     ipcMain.handle("save-file", (event, textAreaContent) => {
         const result = saveFile(textAreaContent)
         if (result === "duplicate") {
@@ -35,9 +36,15 @@ app.whenReady().then(() => {
         }
         return result
     })
+
     ipcMain.handle("read-file", (event, fileName) => {
         return readFile(fileName)
     })
+
+    ipcMain.handle("get-vault-path", (event, filePath) => {
+        return getFilePath(filePath)
+    })
+
     createWindow()
     
     app.on('activate', () => {

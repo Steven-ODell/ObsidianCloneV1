@@ -1,6 +1,6 @@
 const { vaultPath } = require('../vaultConfig')
 
-const directoryFolder = vaultPath
+let directoryFolder = vaultPath
 
 const fs = require('fs')
 const path = require('path')
