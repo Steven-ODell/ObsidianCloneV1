@@ -9,7 +9,7 @@ const saveFile = (documentString) => {
     if (!documentString || documentString.trim() === "") return null
     let documentSplit = documentString.split("\n")
     if (documentSplit){
-        let documentHeaderTitle = (documentSplit.at(0).substring(0, 23)) + ".md"
+        let documentHeaderTitle = (documentSplit.at(0).substring(0, 40)) + ".md"
         let cleanedTitle = cleanTitle(documentHeaderTitle)
         filePath = path.join(directoryFolder, cleanedTitle)
         // Check if the file exists

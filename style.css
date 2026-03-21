@@ -51,7 +51,7 @@ body {
 
     padding-top: 3px;
     position: relative;
-    left: 70vw;
+    left: 73vw;
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
@@ -67,7 +67,7 @@ body {
 
     padding-top: 3px;
     position: relative;
-    left: 70vw;
+    left: 73vw;
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
@@ -83,7 +83,7 @@ body {
 
     padding-top: 3px;
     position: relative;
-    left: 70vw;
+    left: 73vw;
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
@@ -135,7 +135,9 @@ body {
     color: rgb(238, 238, 238);
     padding-top: 2px;
     padding-bottom: 2px;
-
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .fileButton:hover {
