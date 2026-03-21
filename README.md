@@ -21,7 +21,7 @@ So just to state upfront I am starting this with 7 weeks of self taught coding e
 - Git implementation for a repo and push and pull from it
 - Note connections node visual like Obsidian
 - Calendar button on the left side or a calendar always on right bar
-- A Trie prefix file search
+- A Trie prefix file search to start then eventually Fuzzy Matching to learn more :)
 - Make the parser closer to a 95% .md parser (except tables) not a 75% basically where it is now.
 - Nesting lists in .md parser
 - Profile/Settings menu

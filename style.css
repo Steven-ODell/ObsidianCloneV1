@@ -55,12 +55,10 @@ body {
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
-    border-right: 1px solid whitesmoke;
-    border-left: 1px solid whitesmoke;
 }
 
 #top-bar-new-file:hover {
-    background-color: rgb(64, 19, 106)
+    background-color: rgb(31, 31, 31)
 }
 
 #toggle-editor {
@@ -71,12 +69,10 @@ body {
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
-    border-right: 1px solid whitesmoke;
-    border-left: 1px solid whitesmoke;
 }
 
 #toggle-editor:hover {
-    background-color: rgb(64, 19, 106)
+    background-color: rgb(31, 31, 31)
 }
 
 #toggle-preview {
@@ -87,12 +83,10 @@ body {
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
-    border-right: 1px solid whitesmoke;
-    border-left: 1px solid whitesmoke;
 }
 
 #toggle-preview:hover {
-    background-color: rgb(64, 19, 106)
+    background-color: rgb(31, 31, 31)
 }
 
 #side-tool-bar {

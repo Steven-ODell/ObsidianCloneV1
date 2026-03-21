@@ -9,6 +9,7 @@ const previewButton = document.getElementById("toggle-preview");
 const editorButton = document.getElementById("toggle-editor");
 const newFileButton = document.getElementById("top-bar-new-file")
 const fileExplorer =  document.getElementById("file-explorer")
+const toolBarNewFileButton = document.getElementById("tool-bar-new-file-button")
 
 let root = []
 
@@ -81,6 +82,17 @@ editorButton.addEventListener('click', () => {
 newFileButton.addEventListener('click', async () => {
     /* Sending the signal to the Main.js through the IPC tunnel to 
     process the call which needs system access which is why this window.api is needed*/
+    const newFile = await window.api.saveFile(inputBox.value)
+    if (!newFile) return
+    if (newFile === "duplicate") {
+        
+        return
+    }
+    inputBox.value = ""
+    fileExplorer.append(createNewFileButton(newFile, inputBox))
+})
+
+toolBarNewFileButton.addEventListener('click', async () => {
     const newFile = await window.api.saveFile(inputBox.value)
     if (!newFile) return
     if (newFile === "duplicate") {
