@@ -2,14 +2,13 @@ import { renderer } from "./RendererV3.js";
 import { inlineParser } from "./InlineParserV3.js";
 import { createNewFileButton } from "../file_management/createFileButton.js";
 
-
 const inputBox = document.getElementById("main-editor-text-area");
 const outputDiv = document.getElementById("main-editor-div");
 const previewButton = document.getElementById("toggle-preview");
 const editorButton = document.getElementById("toggle-editor");
-const newFileButton = document.getElementById("top-bar-new-file")
+const feToolBarNewFileButton = document.getElementById("fe-new-file");
+const sideToolBarNewFile = document.getElementById("tool-bar-new-file-button");
 const fileExplorer =  document.getElementById("file-explorer")
-const toolBarNewFileButton = document.getElementById("tool-bar-new-file-button")
 
 let root = []
 
@@ -22,6 +21,9 @@ const startingItems = [
     { pattern:/^\d+\.\s/, type: "ol"},
     { pattern:/^\-\-\-/, type: "hr"},
 ]
+
+
+
 
 // Test Input area
 inputBox.addEventListener('input', ()  => {
@@ -79,24 +81,22 @@ editorButton.addEventListener('click', () => {
     inputBox.style.zIndex = 2;
 })
 
-newFileButton.addEventListener('click', async () => {
+feToolBarNewFileButton.addEventListener('click', async () => {
     /* Sending the signal to the Main.js through the IPC tunnel to 
     process the call which needs system access which is why this window.api is needed*/
     const newFile = await window.api.saveFile(inputBox.value)
     if (!newFile) return
     if (newFile === "duplicate") {
-        
         return
     }
     inputBox.value = ""
     fileExplorer.append(createNewFileButton(newFile, inputBox))
 })
 
-toolBarNewFileButton.addEventListener('click', async () => {
+sideToolBarNewFile.addEventListener('click', async () => {
     const newFile = await window.api.saveFile(inputBox.value)
     if (!newFile) return
     if (newFile === "duplicate") {
-        
         return
     }
     inputBox.value = ""

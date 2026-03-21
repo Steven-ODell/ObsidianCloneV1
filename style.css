@@ -48,7 +48,6 @@ body {
 }
 
 #top-bar-new-file {
-
     padding-top: 3px;
     position: relative;
     left: 73vw;
@@ -62,7 +61,6 @@ body {
 }
 
 #toggle-editor {
-
     padding-top: 3px;
     position: relative;
     left: 73vw;
@@ -76,7 +74,6 @@ body {
 }
 
 #toggle-preview {
-
     padding-top: 3px;
     position: relative;
     left: 73vw;
@@ -98,7 +95,7 @@ body {
     border-right: 1px solid rgb(78, 36, 118);
 }
 
-.sideBarButton {
+.side-bar-button {
     background-color: rgb(19, 19, 19);
     border: none;
     border-radius: 10px;
@@ -108,7 +105,7 @@ body {
     margin-bottom: 0;
 }
 
-.sideBarButton:hover {
+.side-bar-button:hover {
     background-color: rgb(31, 31, 31);
 }
 
@@ -121,6 +118,28 @@ body {
     max-width: 300px;
     overflow: auto;
     border-right: 1px solid rgb(61, 28, 91);
+}
+
+#file-explorer-tool-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px solid rgba(245, 245, 245, 0.175);
+    margin-bottom: 10px;
+}
+
+.file-explorer-tool-bar-button {
+    background-color: rgb(28, 28, 28);
+    border: none;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 5px;
+    margin-bottom: 5px;
+}
+
+.file-explorer-tool-bar-button:hover {
+    background-color: rgb(19, 19, 19);
 }
 
 .fileButton {
