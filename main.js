@@ -6,8 +6,8 @@ const {readFile} = require('./file_management/readFile')
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 1080,
-        height: 720,
+        width: 1280,
+        height: 1000,
         // Initiate the preload when the window loads more details in preload
         webPreferences: {
         preload: path.join(__dirname, 'preload.js')

@@ -9,7 +9,7 @@ const path = require('path')
 
 const readFile = (fileName) => {
     if (fileName){
-        let currentFilePath = path.join(directoryFolder, fileName)
+        let currentFilePath = path.join(directoryFolder, (fileName + ".md"))
         return fs.readFileSync(currentFilePath, 'utf8')
     }
 }
