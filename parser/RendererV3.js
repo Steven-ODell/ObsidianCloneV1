@@ -40,10 +40,7 @@ const renderer = (inputRoot) => {
                         if (child.type === dictType){
                             finalString += d.open + child.value + d.close
                             return true
-                        }
-                //console.log("ParentType:" + node.type)
-                //console.log("ChildType:" + child.type)
-                //console.log("Value:" + child.value)                  
+                        }         
                 })
             })
         }
