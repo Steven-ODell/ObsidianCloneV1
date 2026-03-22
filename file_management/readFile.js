@@ -7,9 +7,9 @@ communicate with it from the browser window via buttons or inputs or whatever el
 const fs = require('fs')
 const path = require('path')
 
-const readFile = (fileName, folderPath, selectedPath) => {
+const readFile = (fileName, selectedPath) => {
     if (fileName) {
-        let currentFilePath = selectedPath
+        let currentFilePath = path.join(selectedPath, fileName + ".md")
         return fs.readFileSync(currentFilePath, 'utf8')
     }
 }

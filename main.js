@@ -29,8 +29,8 @@ app.whenReady().then(() => {
     MainParserV3.js from a button it gets executed here. IPC preload was the tunnel to set
     that up so main can talk to the specific browser calls*/
 
-    ipcMain.handle("save-file", (event, textAreaContent) => {
-        const result = saveFile(textAreaContent)
+    ipcMain.handle("save-file", (event, textAreaContent, selectedPath) => {
+        const result = saveFile(textAreaContent, selectedPath)
         if (result === "duplicate") {
             dialog.showMessageBox({ message: "A file with that title already exists." })
             return "duplicate"
@@ -38,8 +38,8 @@ app.whenReady().then(() => {
         return result
     })
 
-    ipcMain.handle("read-file", (event, fileName) => {
-        return readFile(fileName)
+    ipcMain.handle("read-file", (event, fileName, selectedPath) => {
+        return readFile(fileName, selectedPath)
     })
 
     ipcMain.handle("create-folder", (event, currentPath, folderName) => {

@@ -7,7 +7,8 @@ const createNewFileButton = (fileName, inputBox, selectedPath) => {
     newFileButton.className = "fileButton"
     newFileButton.id = "button" + fileName
     newFileButton.innerText = fileName
-    newFileButton.onclick = async () => {
+    newFileButton.onclick = async (e) => {
+        e.stopPropagation()
         inputBox.value = await window.api.readFile(fileName, selectedPath)
     }
     return newFileButton

@@ -3,7 +3,8 @@ const createFolderButton = (folderName, folderPath, selectedPathSetter) => {
     newFolderButton.className = "folderButton"
     newFolderButton.id = "button" + folderName
     newFolderButton.innerText = folderName
-    newFolderButton.onclick = () => {
+    newFolderButton.onclick = (e) => {
+        e.stopPropagation()
         selectedPathSetter(folderPath)
     }
     return newFolderButton

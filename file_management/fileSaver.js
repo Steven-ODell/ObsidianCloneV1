@@ -5,13 +5,13 @@ let directoryFolder = vaultPath
 const fs = require('fs')
 const path = require('path')
 
-const saveFile = (documentString) => {
+const saveFile = (documentString, selectedPath) => {
     if (!documentString || documentString.trim() === "") return null
     let documentSplit = documentString.split("\n")
     if (documentSplit) {
         let documentHeaderTitle = (documentSplit.at(0).substring(0, 40)) + ".md"
         let cleanedTitle = cleanTitle(documentHeaderTitle)
-        filePath = path.join(directoryFolder, cleanedTitle)
+        filePath = path.join(selectedPath, cleanedTitle)
         // Check if the file exists
         if (!(fs.existsSync(filePath))) {
             fs.writeFile(filePath, documentString, (err) => { if (err) console.log(err) })

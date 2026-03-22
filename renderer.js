@@ -30,10 +30,8 @@ editorButton.addEventListener('click', () => {
     inputBox.style.zIndex = 2;
 })
 
-feToolBarNewFileButton.addEventListener('click', async () => {
-    /* Sending the signal to the Main.js through the IPC tunnel to 
-    process the call which needs system access which is why this window.api is needed*/
-    const newFile = await window.api.saveFile(inputBox.value)
+sideToolBarNewFile.addEventListener('click', async () => {
+    const newFile = await window.api.saveFile(inputBox.value, selectedPath)
     if (!newFile) return
     if (newFile === "duplicate") {
         return
@@ -42,8 +40,14 @@ feToolBarNewFileButton.addEventListener('click', async () => {
     fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
 })
 
-sideToolBarNewFile.addEventListener('click', async () => {
-    const newFile = await window.api.saveFile(inputBox.value)
+fileExplorer.addEventListener('click', () => {
+    selectedPath = '/Users/Steven/Desktop/Learning to Code 2026/JS/ElectronProjects/ObsidianCloneV1/TestVault'
+})
+
+feToolBarNewFileButton.addEventListener('click', async () => {
+    /* Sending the signal to the Main.js through the IPC tunnel to 
+    process the call which needs system access which is why this window.api is needed*/
+    const newFile = await window.api.saveFile(inputBox.value, selectedPath)
     if (!newFile) return
     if (newFile === "duplicate") {
         return
@@ -69,3 +73,4 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
         }
     })
 })
+
