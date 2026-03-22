@@ -3,23 +3,23 @@ import { inlineParser } from "./InlineParserV3.js"
 let root = []
 
 const startingItems = [
-    { pattern: /^\#\#\#\s/,   type: "h3" },
-    { pattern: /^\#\#\s/,    type: "h2" },
-    { pattern: /^\#\s/,     type: "h1" },
-    { pattern: /^\>\s/,     type: "blockquote" },
-    { pattern: /^\-\s/ ,    type: "ul" },
-    { pattern:/^\d+\.\s/, type: "ol"},
-    { pattern:/^\-\-\-/, type: "hr"},
+    { pattern: /^\#\#\#\s/, type: "h3" },
+    { pattern: /^\#\#\s/, type: "h2" },
+    { pattern: /^\#\s/, type: "h1" },
+    { pattern: /^\>\s/, type: "blockquote" },
+    { pattern: /^\-\s/, type: "ul" },
+    { pattern: /^\d+\.\s/, type: "ol" },
+    { pattern: /^\-\-\-/, type: "hr" },
 ]
 
 const blockParser = (inputString) => {
-    
-    if (inputString === "") {root = []}
+
+    if (inputString === "") { root = [] }
 
     let splitStringArray = inputString.split("\n"); //Break into the HTML blocks
     root.length = 0
     let currentObject = {}
-    let nestLevel = 0 
+    let nestLevel = 0
 
     splitStringArray.forEach(block => {
         const matched = startingItems.find(patterns => { //Search for start pattern. If found return true and push value into object
@@ -37,17 +37,17 @@ const blockParser = (inputString) => {
 
         if (!matched) { // If header not found label it as a paragraph and add value and ship as object
             currentObject = {
-            type: "p",
-            value: block,
-            nestLevel: 0,
-            children: []
-            } 
+                type: "p",
+                value: block,
+                nestLevel: 0,
+                children: []
+            }
             root.push(currentObject)
         }
     })
-    root  = inlineParser(root) // send root off to parse for inline items 
+    root = inlineParser(root) // send root off to parse for inline items 
     console.log("Tree is:\n" + JSON.stringify(root, null, 2))
     return root // send tree back to be sent the renderer
 }
 
-export {blockParser}
+export { blockParser }

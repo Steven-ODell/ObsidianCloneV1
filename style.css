@@ -5,6 +5,7 @@ body {
     margin: 0;
     height: 100vh;
 }
+
 #div-row-body {
     display: flex;
     flex-direction: row;
@@ -142,12 +143,40 @@ body {
     background-color: rgb(19, 19, 19);
 }
 
+.tempFolderNameInput {
+    background-color: rgb(19, 19, 19);
+    color: whitesmoke;
+    outline: none;
+    caret-color: rgb(118, 43, 230);
+    border: none;
+    padding-left: 10px;
+    height: 20px;
+    border-radius: 2px;
+}
+
+.folderButton {
+    border-width: 0;
+    background-color: rgb(42, 18, 56);
+    color: rgb(238, 238, 238);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.folderButton:hover {
+    background-color: rgb(61, 40, 80)
+}
+
 .fileButton {
     border-width: 0;
     background-color: rgb(23, 23, 23);
     color: rgb(238, 238, 238);
     padding-top: 2px;
     padding-bottom: 2px;
+    text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

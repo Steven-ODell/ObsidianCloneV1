@@ -8,7 +8,7 @@ const fs = require('fs')
 const path = require('path')
 
 const readFile = (fileName, folderPath) => {
-    if (fileName){
+    if (fileName) {
         let currentFilePath = path.join(folderPath, (fileName + ".md"))
         return fs.readFileSync(currentFilePath, 'utf8')
     }

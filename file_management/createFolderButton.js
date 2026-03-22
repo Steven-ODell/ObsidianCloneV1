@@ -1,15 +1,13 @@
-
-
-const createFolderButton(folderName, filePath, (newPath) => {
+const createFolderButton = (folderName, folderPath, selectedPathSetter) => {
     let newFolderButton = document.createElement('button')
-    newFolderButton.className = "fileButton"
+    newFolderButton.className = "folderButton"
     newFolderButton.id = "button" + folderName
     newFolderButton.innerText = folderName
-    selectedPath = newPath
-    newFolderButton.onclick = async () => {
-        onClickCallback(filePath)
+    newFolderButton.onclick = () => {
+        selectedPathSetter(folderPath)
+
     }
     return newFolderButton
-})
+}
 
-module.exports = {createFolderButton}
+export { createFolderButton }

@@ -1,7 +1,8 @@
 import { renderer } from "./parser/RendererV3.js";
 import { createNewFileButton } from "./file_management/createFileButton.js";
-let selectedPath = '/Users/Steven/Desktop/Learning to Code 2026/JS/ElectronProjects/ObsidianCloneV1/TestVault'
 import { blockParser } from "./parser/MainParserV3.js";
+import { createFolderButton } from "./file_management/createFolderButton.js";
+let selectedPath = '/Users/Steven/Desktop/Learning to Code 2026/JS/ElectronProjects/ObsidianCloneV1/TestVault'
 
 const inputBox = document.getElementById("main-editor-text-area");
 const outputDiv = document.getElementById("main-editor-div");
@@ -10,9 +11,9 @@ const editorButton = document.getElementById("toggle-editor");
 const feToolBarNewFileButton = document.getElementById("fe-new-file");
 const feToolBarNewFolderButton = document.getElementById("fe-new-folder");
 const sideToolBarNewFile = document.getElementById("tool-bar-new-file-button");
-const fileExplorer =  document.getElementById("file-explorer")
+const fileExplorer = document.getElementById("file-explorer")
 
-inputBox.addEventListener('input', ()  => {
+inputBox.addEventListener('input', () => {
     const rootReadyForRender = blockParser(inputBox.value)
     outputDiv.innerHTML = renderer(rootReadyForRender)
 })
@@ -52,5 +53,19 @@ sideToolBarNewFile.addEventListener('click', async () => {
 })
 
 feToolBarNewFolderButton.addEventListener('click', async () => {
-    const newFolder = await window.api.createFolderButton(selectedPath)
+    const folderName = document.createElement('input')
+    folderName.className = "tempFolderNameInput"
+    fileExplorer.append(folderName)
+    folderName.focus()
+    folderName.addEventListener('keydown', async (e) => {
+        if (e.key === 'Enter') {
+            if (folderName.value === "") { return }
+            const fullPath = await window.api.createFolder(selectedPath, folderName.value)
+            fileExplorer.append(createFolderButton(folderName.value, fullPath, (newPath) => {
+                selectedPath = newPath
+            })
+            )
+            folderName.remove()
+        }
+    })
 })

@@ -1,8 +1,9 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron/main')
 
+const fs = require('fs')
 const path = require('path')
-const {saveFile} = require('./file_management/fileSaver')
-const {readFile} = require('./file_management/readFile')
+const { saveFile } = require('./file_management/fileSaver')
+const { readFile } = require('./file_management/readFile')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -10,8 +11,8 @@ const createWindow = () => {
         height: 1000,
         // Initiate the preload when the window loads more details in preload
         webPreferences: {
-        preload: path.join(__dirname, 'preload.js')
-    }
+            preload: path.join(__dirname, 'preload.js')
+        }
     })
     win.loadFile('main.html')
     win.webContents.openDevTools()
@@ -27,7 +28,7 @@ app.whenReady().then(() => {
     talk to the system via Main.js. When a function is called like save-file in 
     MainParserV3.js from a button it gets executed here. IPC preload was the tunnel to set
     that up so main can talk to the specific browser calls*/
-    
+
     ipcMain.handle("save-file", (event, textAreaContent) => {
         const result = saveFile(textAreaContent)
         if (result === "duplicate") {
@@ -41,12 +42,14 @@ app.whenReady().then(() => {
         return readFile(fileName)
     })
 
-    ipcMain.handle("get-vault-path", (event, filePath) => {
-        return getFilePath(filePath)
+    ipcMain.handle("create-folder", (event, currentPath, folderName) => {
+        const fullPath = path.join(currentPath, folderName)
+        fs.mkdirSync(fullPath)
+        return fullPath
     })
 
     createWindow()
-    
+
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })

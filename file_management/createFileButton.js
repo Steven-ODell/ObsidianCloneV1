@@ -1,4 +1,3 @@
-
 const createNewFileButton = (fileName, inputBox) => {
     /* Create new button variable element and assign its id/class for css/inner.Text/
     -onclick allows the inputBox which was passed in to ask the IPC API to main to 
@@ -13,5 +12,5 @@ const createNewFileButton = (fileName, inputBox) => {
     }
     return newFileButton
 }
-export {createNewFileButton}
+export { createNewFileButton }
 
