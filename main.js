@@ -2,7 +2,8 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron/main')
 
 const fs = require('fs')
 const path = require('path')
-const vaultPath  = require('./vaultConfig')
+const { buildTree } = require('./file_management/startUpFeCreation')
+const { vaultPath } = require('./vaultConfig')
 const { saveFile } = require('./file_management/fileSaver')
 const { readFile } = require('./file_management/readFile')
 
@@ -16,19 +17,18 @@ const createWindow = () => {
         }
     })
     win.loadFile('main.html')
+
+    /* Load the files on stat up and create the proper file-explorer directory on start-up */
+    win.webContents.on('did-finish-load', () => {
+        let vaultTree = buildTree(vaultPath)
+        win.webContents.send('vault-start-load', vaultTree)
+    })
     win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
     
-    /* Load the files on stat up and create the proper file-explorer directory on start-up 
-    let startUpVaultData = fs.readdir(vaultPath)
-    startUpVaultData.forEach(i => {
-        if (!(i.endsWith(".md"))) {
 
-        }
-    })
-    */
     /* IPCMain handles are basically event listeners for the IPC Tunnel
     when you set one up a handle allows the functions in that tunnel to
     processes what comes through the tunnel and sends it back through with return
