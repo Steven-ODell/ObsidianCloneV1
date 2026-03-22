@@ -56,13 +56,21 @@ feToolBarNewFileButton.addEventListener('click', async () => {
     fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
 })
 
+/* Create input for folder name. Focus that and check for typing.
+Add the button visual in explorer to see it. Focus that to type name
+If enter is pressed or unfocus from folder keep the name if it exists.
+After all that then send the folder to get created with the name and link it 
+to the path currently highlighted via selectedPath and the button that 
+was temporary input gets deleted and new button created takes place. 
+Looks like seamless typing name and then create folder.
+*/
 feToolBarNewFolderButton.addEventListener('click', async () => {
     const folderName = document.createElement('input')
     folderName.className = "tempFolderNameInput"
     fileExplorer.append(folderName)
     folderName.focus()
     folderName.addEventListener('keydown', async (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter'||!(folderName.focus())) {
             if (folderName.value === "") { return }
             const fullPath = await window.api.createFolder(selectedPath, folderName.value)
             fileExplorer.append(createFolderButton(folderName.value, fullPath, (newPath) => {

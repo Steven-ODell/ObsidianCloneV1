@@ -12,7 +12,8 @@ const saveFile = (documentString, selectedPath) => {
         let documentHeaderTitle = (documentSplit.at(0).substring(0, 40)) + ".md"
         let cleanedTitle = cleanTitle(documentHeaderTitle)
         filePath = path.join(selectedPath, cleanedTitle)
-        // Check if the file exists
+        // Check if the file exists for duplicate. 
+        // If it exists clearly the file is taken so don't overwrite throw a dialog (in main.js)
         if (!(fs.existsSync(filePath))) {
             fs.writeFile(filePath, documentString, (err) => { if (err) console.log(err) })
         }

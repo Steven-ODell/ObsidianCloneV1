@@ -6,6 +6,22 @@ body {
     height: 100vh;
 }
 
+blockquote {
+    background-color: rgb(50, 50, 50);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+    padding-left: 4px;
+}
+
+code {
+    background-color: rgb(65, 43, 85);
+}
+
+mark {
+    background-color: rgb(96, 73, 118);
+    color: white
+}
+
 #div-row-body {
     display: flex;
     flex-direction: row;

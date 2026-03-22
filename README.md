@@ -1,10 +1,10 @@
 # Intro
 
-So here it is. The first attempt at my "clone of Obsidian". I AM NOT USING AI CODING OR VIBE CODING. I disabled copilot and I have refused to accept codeblocks from AI. I DID use it to generate the SVGs for the buttons. I AM and WILL be asking for new syntax or tools I don't know and check my work or if a bug escapes me I will ask but I am by no means using AI to write this. The realization hit hard when I learned that "Obsidian" started as a editor/preview toggle and not a direct live editor/preview like it is currently. That allowed me to at least set the initial scope to get the project mostly functional and then build out the file stuff and surrounding features before heading into the codemirror implementation to get the live editing/parsing all with the proper alignment of caret and current markdown ending. (absolute nightmare) (if so desired you can read more detailed progress in my last project and how I got _here_ in my last .mdParserV2 project). Basically this my way of forcing myself to learn JS and just coding in general. Me being naive but determined set me up to jump into this clone project after making a bare minimum AST for Markdown. This gave me basically a 6-12 month project with real use case for myself alongside the teaching aspect.
+So here it is. The first attempt at my "clone of Obsidian". **I AM NOT USING AI CODING OR VIBE CODING.** I disabled copilot and I have refused to accept codeblocks from AI chats. I **DID** use it to generate the SVGs for the buttons. I **AM** and **WILL** be asking for new syntax or tools I don't know and check my work or if a bug escapes me I will ask but I am by no means using AI to write this. The realization hit hard when I learned that "Obsidian" started as a editor/preview toggle and not a direct live editor/preview like it is currently. That allowed me to at least set the initial scope to get the project mostly functional and then build out the file stuff and surrounding features before heading into the codemirror implementation to get the live editing/parsing all with the proper alignment of caret and current markdown ending. (absolute nightmare) (if so desired you can read more detailed progress in my last project and how I got _here_ in my last .mdParserV2 project). Basically this my way of forcing myself to learn JS and just coding in general. Me being naive but determined set me up to jump into this clone project after making a bare minimum AST for Markdown. This gave me basically a *6-12* month project with real use case for myself alongside the teaching aspect.
 
 # Scope
 
-So just to state upfront I am starting this with 7 weeks of self taught coding experience. Started this project with ZERO electron experience and ZERO node.js experience. A lot of conceptual knowledge and you can read my comments throughout this project on how I understand IPC currently. This is all a learning process not a perfect sellable future project. The plan as of this moment is to get as close as I can to an "Obsidian clone" with my own twist. Something that can be useful in my everyday. It will be clear where I am cloning and then trying to add my own idea or maybe remove things I wouldn't use personally.
+So just to state upfront I am starting this with 7 weeks of self taught coding experience. Started this project with **ZERO** electron experience and **ZERO** node.js experience. A lot of conceptual knowledge and you can read my comments throughout this project on how I understand IPC currently. This is all a learning process not a perfect sellable future project. The plan as of this moment is to get as close as I can to an "Obsidian clone" with my own twist. Something that can be useful in my everyday. It will be clear where I am cloning and then trying to add my own idea or maybe remove things I wouldn't use personally.
 
 ## What is built so far
 - Parser AST is made and works on basic .md cases
@@ -12,8 +12,11 @@ So just to state upfront I am starting this with 7 weeks of self taught coding e
 - IPC file saving and reading
 - "FileExplorer" openable files
 - Vault config (just a path in a file now but will be settings input eventually)
+- Folder Creation and ***"focus"*** nesting but no proper visual or collapsing yet
 
 ## List of features planned
+- Upon load create the file-explorer not just upon file creation within session
+- Proper folder nesting visually
 - AI Autocomplete for notes(Copilot for notes)
 - AI summary on right sidebar
 - AI plug in Local or API key

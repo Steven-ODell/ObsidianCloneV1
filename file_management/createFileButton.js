@@ -7,6 +7,8 @@ const createNewFileButton = (fileName, inputBox, selectedPath) => {
     newFileButton.className = "fileButton"
     newFileButton.id = "button" + fileName
     newFileButton.innerText = fileName
+    /* The stopPropagation was needed to stop from collapsing to the root folder
+    always since the buttons sit in file-explorer div which changes path to root upon click */
     newFileButton.onclick = async (e) => {
         e.stopPropagation()
         inputBox.value = await window.api.readFile(fileName, selectedPath)
