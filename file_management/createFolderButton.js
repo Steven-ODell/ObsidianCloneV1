@@ -5,7 +5,6 @@ const createFolderButton = (folderName, folderPath, selectedPathSetter) => {
     newFolderButton.innerText = folderName
     newFolderButton.onclick = () => {
         selectedPathSetter(folderPath)
-
     }
     return newFolderButton
 }

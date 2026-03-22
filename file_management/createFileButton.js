@@ -1,4 +1,4 @@
-const createNewFileButton = (fileName, inputBox) => {
+const createNewFileButton = (fileName, inputBox, selectedPath) => {
     /* Create new button variable element and assign its id/class for css/inner.Text/
     -onclick allows the inputBox which was passed in to ask the IPC API to main to 
     handle the system level requirement of the function. This triggers main to process the 
@@ -8,7 +8,7 @@ const createNewFileButton = (fileName, inputBox) => {
     newFileButton.id = "button" + fileName
     newFileButton.innerText = fileName
     newFileButton.onclick = async () => {
-        inputBox.value = await window.api.readFile(fileName)
+        inputBox.value = await window.api.readFile(fileName, selectedPath)
     }
     return newFileButton
 }

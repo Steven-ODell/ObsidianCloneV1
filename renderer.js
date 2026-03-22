@@ -39,7 +39,7 @@ feToolBarNewFileButton.addEventListener('click', async () => {
         return
     }
     inputBox.value = ""
-    fileExplorer.append(createNewFileButton(newFile, inputBox))
+    fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
 })
 
 sideToolBarNewFile.addEventListener('click', async () => {
@@ -49,7 +49,7 @@ sideToolBarNewFile.addEventListener('click', async () => {
         return
     }
     inputBox.value = ""
-    fileExplorer.append(createNewFileButton(newFile, inputBox))
+    fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
 })
 
 feToolBarNewFolderButton.addEventListener('click', async () => {
