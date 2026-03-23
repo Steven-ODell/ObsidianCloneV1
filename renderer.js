@@ -13,10 +13,6 @@ const feToolBarNewFolderButton = document.getElementById("fe-new-folder");
 const sideToolBarNewFile = document.getElementById("tool-bar-new-file-button");
 const fileExplorer = document.getElementById("file-explorer")
 
-window.api.onVaultLoad((event, vaultTree) => {
-    // build buttons from vaultTree here
-})
-
 inputBox.addEventListener('input', () => {
     const rootReadyForRender = blockParser(inputBox.value)
     outputDiv.innerHTML = renderer(rootReadyForRender)
