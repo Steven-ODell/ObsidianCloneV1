@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron/main')
 
 const fs = require('fs')
 const path = require('path')
-const { buildTree } = require('./file_management/fileExplorerRender')
+const { buildTree } = require('./file_management/fileExplorerBuilder')
 const { vaultPath } = require('./vaultConfig')
 const { saveFile } = require('./file_management/fileSaver')
 const { readFile } = require('./file_management/readFile')
@@ -18,12 +18,12 @@ const createWindow = () => {
     })
     win.loadFile('main.html')
 
-    /* Load the files on stat up and create the proper file-explorer directory on start-up */
+    /* Load the files on start up and send the tree to be made into buttons */
     win.webContents.on('did-finish-load', () => {
         let vaultTree = buildTree(vaultPath)
-        win.webContents.send('vault-start-load', vaultTree)
+        win.webContents.send('vault-start-load-tree', vaultTree)
     })
-    
+
     win.webContents.openDevTools()
 }
 

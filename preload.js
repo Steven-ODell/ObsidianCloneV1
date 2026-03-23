@@ -6,5 +6,5 @@ contextBridge.exposeInMainWorld('api', {
     saveFile: (textAreaContent, selectedPath) => ipcRenderer.invoke('save-file', textAreaContent, selectedPath),
     readFile: (fileName, selectedPath) => ipcRenderer.invoke('read-file', fileName, selectedPath),
     createFolder: (currentPath, folderName) => ipcRenderer.invoke('create-folder', currentPath, folderName),
-    startUpFilesArray: (vaultTree) => ipcRenderer.on('vault-start-load', vaultTree),
+    createTreeOnStart: (callback) => ipcRenderer.on('vault-start-load-tree', callback)
 })
