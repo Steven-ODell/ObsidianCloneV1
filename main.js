@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron/main')
 
 const fs = require('fs')
 const path = require('path')
-const { buildTree } = require('./file_management/startUpFeCreation')
+const { buildTree } = require('./file_management/fileExplorerRender')
 const { vaultPath } = require('./vaultConfig')
 const { saveFile } = require('./file_management/fileSaver')
 const { readFile } = require('./file_management/readFile')
@@ -23,6 +23,7 @@ const createWindow = () => {
         let vaultTree = buildTree(vaultPath)
         win.webContents.send('vault-start-load', vaultTree)
     })
+    
     win.webContents.openDevTools()
 }
 
