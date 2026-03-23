@@ -170,6 +170,11 @@ mark {
     border-radius: 2px;
 }
 
+.folder-wrapper-div {
+    display: flex;
+    flex-direction: column;  
+}
+
 .folderButton {
     border-width: 0;
     background-color: rgb(42, 18, 56);
@@ -180,6 +185,7 @@ mark {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+
 }
 
 .folderButton:hover {
@@ -188,6 +194,9 @@ mark {
 
 .fileButton {
     border-width: 0;
+    display: flex;
+    flex-direction: column;  
+    width: 100%;
     background-color: rgb(23, 23, 23);
     color: rgb(238, 238, 238);
     padding-top: 2px;

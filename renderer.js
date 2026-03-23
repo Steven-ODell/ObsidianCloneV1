@@ -2,6 +2,7 @@ import { renderer } from "./parser/RendererV3.js";
 import { createNewFileButton } from "./file_management/createFileButton.js";
 import { blockParser } from "./parser/MainParserV3.js";
 import { createFolderButton } from "./file_management/createFolderButton.js";
+
 let selectedPath = '/Users/Steven/Desktop/Learning to Code 2026/JS/ElectronProjects/ObsidianCloneV1/TestVault'
 
 const inputBox = document.getElementById("main-editor-text-area");
@@ -13,9 +14,37 @@ const feToolBarNewFolderButton = document.getElementById("fe-new-folder");
 const sideToolBarNewFile = document.getElementById("tool-bar-new-file-button");
 const fileExplorer = document.getElementById("file-explorer")
 
-window.api.onVaultLoad((event, vaultTree) => {
-    // vaultTree is your array here
+//Gets callback of vault tree to build the buttons with
+window.api.createTreeOnStart((event, vaultTree) => {
+    buildButtons(vaultTree, fileExplorer)
 })
+
+const buildButtons = (treeArray, containerDiv) => {
+    treeArray.forEach(i => {
+        if (i.type === "File") {
+            containerDiv.append(createNewFileButton(i.name.replace(".md", ""), inputBox, i.path))
+        }
+        if (i.type === "Folder") {
+            // create folder button, append to containerDiv
+            let folderButton = createFolderButton(i.name, i.path, (newPath) => {
+                selectedPath = newPath
+            })
+            let folderWrapperDiv = document.createElement('div')
+            folderWrapperDiv.className = 'folder-wrapper-div'
+            folderWrapperDiv.style.display = 'none'
+            folderButton.addEventListener('click', () => {
+                if (folderWrapperDiv.style.display === 'none') {
+                    folderWrapperDiv.style.display = 'block'
+                } else {
+                    folderWrapperDiv.style.display = 'none'
+                }
+            })
+            containerDiv.append(folderButton)
+            buildButtons(i.children, folderWrapperDiv)
+            containerDiv.append(folderWrapperDiv)
+        }
+    })
+}
 
 inputBox.addEventListener('input', () => {
     const rootReadyForRender = blockParser(inputBox.value)
@@ -74,7 +103,7 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
     fileExplorer.append(folderName)
     folderName.focus()
     folderName.addEventListener('keydown', async (e) => {
-        if (e.key === 'Enter'||!(folderName.focus())) {
+        if (e.key === 'Enter') {
             if (folderName.value === "") { return }
             const fullPath = await window.api.createFolder(selectedPath, folderName.value)
             fileExplorer.append(createFolderButton(folderName.value, fullPath, (newPath) => {

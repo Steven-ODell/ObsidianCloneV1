@@ -9,8 +9,7 @@ const path = require('path')
 
 const readFile = (fileName, selectedPath) => {
     if (fileName) {
-        let currentFilePath = path.join(selectedPath, fileName + ".md")
-        return fs.readFileSync(currentFilePath, 'utf8')
+        return fs.readFileSync(selectedPath, 'utf8')
     }
 }
 module.exports = { readFile }
