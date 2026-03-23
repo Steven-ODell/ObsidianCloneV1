@@ -17,18 +17,10 @@ const createWindow = () => {
         }
     })
     win.loadFile('main.html')
-
-    /* Load the files on stat up and create the proper file-explorer directory on start-up */
-    win.webContents.on('did-finish-load', () => {
-        let vaultTree = buildTree(vaultPath)
-        win.webContents.send('vault-start-load', vaultTree)
-    })
     win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
-    
-
     /* IPCMain handles are basically event listeners for the IPC Tunnel
     when you set one up a handle allows the functions in that tunnel to
     processes what comes through the tunnel and sends it back through with return
@@ -38,7 +30,8 @@ app.whenReady().then(() => {
     talk to the system via Main.js. When a function is called like save-file in 
     MainParserV3.js from a button it gets executed here. IPC preload was the tunnel to set
     that up so main can talk to the specific browser calls*/
-
+    ipcMain.handle('get-vault-tree', () => buildTree(vaultPath))
+    
     ipcMain.handle("save-file", (event, textAreaContent, selectedPath) => {
         const result = saveFile(textAreaContent, selectedPath)
         if (result === "duplicate") {
