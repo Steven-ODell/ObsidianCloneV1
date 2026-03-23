@@ -9,7 +9,7 @@ const { readFile } = require('./file_management/readFile')
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 1280,
+        width: 1400,
         height: 1000,
         // Initiate the preload when the window loads more details in preload
         webPreferences: {
