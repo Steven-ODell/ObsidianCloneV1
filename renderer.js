@@ -39,6 +39,8 @@ const buildButtons = (treeArray, containerDiv) => {
                     folderWrapperDiv.style.display = 'none'
                 }
             })
+
+            folderButton.style.marginRight = "10px" * i.depth
             containerDiv.append(folderButton)
             buildButtons(i.children, folderWrapperDiv)
             containerDiv.append(folderWrapperDiv)

@@ -77,6 +77,19 @@ mark {
     background-color: rgb(31, 31, 31)
 }
 
+#save-file-top-bar {
+    padding-top: 3px;
+    position: relative;
+    left: 73vw;
+    border-radius: 5px;
+    border-width: 0;
+    background-color: rgb(16, 16, 16);
+}
+
+#save-file-top-bar:hover {
+    background-color: rgb(31, 31, 31)
+}
+
 #toggle-editor {
     padding-top: 3px;
     position: relative;
@@ -185,6 +198,7 @@ mark {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    width: 100%;
 
 }
 

@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const buildTree = (currentPath) => {
+const buildTree = (currentPath, depth) => {
     let currentTree = []
     let folderArray = fs.readdirSync(currentPath)
     folderArray.forEach(i => {
@@ -11,13 +11,15 @@ const buildTree = (currentPath) => {
                 type: "File",
                 path: fullPath,
                 name: i,
+                depth: depth,
             })
         } else {
             currentTree.push({
                 type: "Folder",
                 path: fullPath,
                 name: i,
-                children: buildTree(fullPath)
+                depth: depth + 1,
+                children: buildTree(fullPath, depth + 1),
             })
         }
     })
