@@ -6,6 +6,7 @@ const { buildTree } = require('./file_management/fileExplorerBuilder')
 const { vaultPath } = require('./vaultConfig')
 const { saveFile } = require('./file_management/fileSaver')
 const { readFile } = require('./file_management/readFile')
+const { getVaultTree } = require('./file_management/getVaultTree')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -20,7 +21,7 @@ const createWindow = () => {
 
     /* Load the files on start up and send the tree to be made into buttons */
     win.webContents.on('did-finish-load', () => {
-        let vaultTree = buildTree(vaultPath)
+        let vaultTree = buildTree(vaultPath, 0)
         win.webContents.send('vault-start-load-tree', vaultTree)
     })
 
@@ -28,7 +29,6 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
-    
 
     /* IPCMain handles are basically event listeners for the IPC Tunnel
     when you set one up a handle allows the functions in that tunnel to
@@ -39,6 +39,11 @@ app.whenReady().then(() => {
     talk to the system via Main.js. When a function is called like save-file in 
     MainParserV3.js from a button it gets executed here. IPC preload was the tunnel to set
     that up so main can talk to the specific browser calls*/
+
+    ipcMain.handle('get-vault-tree', (event, vaultTree) => {
+        vaultTree = getVaultTree(vaultPath, 0)
+        return vaultTree
+    })
 
     ipcMain.handle("save-file", (event, textAreaContent, selectedPath) => {
         const result = saveFile(textAreaContent, selectedPath)

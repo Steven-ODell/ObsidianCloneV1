@@ -12,7 +12,8 @@ const editorButton = document.getElementById("toggle-editor");
 const feToolBarNewFileButton = document.getElementById("fe-new-file");
 const feToolBarNewFolderButton = document.getElementById("fe-new-folder");
 const sideToolBarNewFile = document.getElementById("tool-bar-new-file-button");
-const fileExplorer = document.getElementById("file-explorer")
+const fileExplorer = document.getElementById("file-explorer");
+const saveFileTopBar = document.getElementById("save-file-top-bar");
 
 //Gets callback of vault tree to build the buttons with
 window.api.createTreeOnStart((event, vaultTree) => {
@@ -39,8 +40,7 @@ const buildButtons = (treeArray, containerDiv) => {
                     folderWrapperDiv.style.display = 'none'
                 }
             })
-
-            folderButton.style.marginRight = "10px" * i.depth
+            folderWrapperDiv.style.marginLeft = (i.depth * 10) + "px"
             containerDiv.append(folderButton)
             buildButtons(i.children, folderWrapperDiv)
             containerDiv.append(folderWrapperDiv)
@@ -73,6 +73,10 @@ sideToolBarNewFile.addEventListener('click', async () => {
     }
     inputBox.value = ""
     fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
+    
+    let vaultTree = await window.api.getVaultTree()
+    clearFileExplorerDiv(fileExplorer)
+    buildButtons(vaultTree, fileExplorer)
 })
 
 fileExplorer.addEventListener('click', () => {
@@ -89,6 +93,10 @@ feToolBarNewFileButton.addEventListener('click', async () => {
     }
     inputBox.value = ""
     fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
+    
+    let vaultTree = await window.api.getVaultTree()
+    clearFileExplorerDiv(fileExplorer)
+    buildButtons(vaultTree, fileExplorer)
 })
 
 /* Create input for folder name. Focus that and check for typing.
@@ -115,5 +123,15 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
             folderName.remove()
         }
     })
+    let vaultTree = await window.api.getVaultTree()
+    clearFileExplorerDiv(fileExplorer)
+    buildButtons(vaultTree, fileExplorer)
 })
 
+const clearFileExplorerDiv = (fileExplorerDiv) => {
+    let explorerSplit = Array.from(fileExplorerDiv.children)
+    explorerSplit.forEach(i => {
+        if (i.id === 'file-explorer-tool-bar') {return}
+        else {i.remove()}
+    })
+}

@@ -11,6 +11,7 @@ const createNewFileButton = (fileName, inputBox, selectedPath) => {
     always since the buttons sit in file-explorer div which changes path to root upon click */
     newFileButton.onclick = async (e) => {
         e.stopPropagation()
+        if (!(fileName.endsWith(".md"))) {fileName = fileName + ".md"}
         inputBox.value = await window.api.readFile(fileName, selectedPath)
         inputBox.dispatchEvent(new Event('input'))
     }
