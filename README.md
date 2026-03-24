@@ -12,11 +12,13 @@ So just to state upfront I am starting this with 7 weeks of self taught coding e
 - IPC file saving and reading
 - "FileExplorer" openable files
 - Vault config (just a path in a file now but will be settings input eventually)
-- Folder Creation and ***"focus"*** nesting but no proper visual or collapsing yet
+- Folder Creation and ***"focus"*** nesting
+- Proper folder nesting visually
+- Upon load create the file-explorer not just upon file creation within session
+- Folder SVG rotation up opening or closing
+- Save folder state after new file/folder creation
 
 ## List of features planned
-- Upon load create the file-explorer not just upon file creation within session
-- Proper folder nesting visually
 - AI Autocomplete for notes(Copilot for notes)
 - AI summary on right sidebar
 - AI plug in Local or API key

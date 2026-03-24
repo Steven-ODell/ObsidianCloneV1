@@ -10,8 +10,8 @@ const { getVaultTree } = require('./file_management/getVaultTree')
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 1400,
-        height: 1000,
+        width: 1200,
+        height: 900,
         // Initiate the preload when the window loads more details in preload
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
