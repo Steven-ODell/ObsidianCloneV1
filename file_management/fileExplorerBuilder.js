@@ -18,6 +18,7 @@ const buildTree = (currentPath, depth) => {
                 type: "Folder",
                 path: fullPath,
                 name: i,
+                //increase depth for folders to later add nesting indent
                 depth: depth + 1,
                 children: buildTree(fullPath, depth + 1),
             })

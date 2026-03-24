@@ -18,6 +18,7 @@ const getVaultTree = (currentPath, depth) => {
                 type: "Folder",
                 path: fullPath,
                 name: i,
+                //increase depth for this iteration of tree building
                 depth: depth + 1,
                 children: getVaultTree(fullPath, depth + 1),
             })

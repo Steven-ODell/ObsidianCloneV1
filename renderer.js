@@ -42,6 +42,7 @@ const buildButtons = (treeArray, containerDiv) => {
                     folderButton.style.backgroundColor = "rgb(28, 28, 28)"
                 }
             })
+            // Offset the files within the folder when opening
             folderWrapperDiv.style.marginLeft = (i.depth * 10) + "px"
             containerDiv.append(folderButton)
             buildButtons(i.children, folderWrapperDiv)
@@ -77,8 +78,11 @@ sideToolBarNewFile.addEventListener('click', async () => {
     fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
     
     let vaultTree = await window.api.getVaultTree()
-    clearFileExplorerDiv(fileExplorer)
+    let explorerSaver = clearFileExplorerDiv(fileExplorer)
     buildButtons(vaultTree, fileExplorer)
+    Array.from(fileExplorer.children).forEach(k => {
+        if (explorerSaver.includes(k.id)) { k.click() }
+    })   
 })
 
 fileExplorer.addEventListener('click', () => {
@@ -97,8 +101,11 @@ feToolBarNewFileButton.addEventListener('click', async () => {
     fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
     
     let vaultTree = await window.api.getVaultTree()
-    clearFileExplorerDiv(fileExplorer)
+    let explorerSaver = clearFileExplorerDiv(fileExplorer)
     buildButtons(vaultTree, fileExplorer)
+    Array.from(fileExplorer.children).forEach(k => {
+        if (explorerSaver.includes(k.id)) { k.click() }
+    })   
 })
 
 /* Create input for folder name. Focus that and check for typing.
@@ -123,17 +130,24 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
             })
             )
             folderName.remove()
-        let vaultTree = await window.api.getVaultTree()
-        clearFileExplorerDiv(fileExplorer)
-        buildButtons(vaultTree, fileExplorer)       
+
+            let vaultTree = await window.api.getVaultTree()
+            let explorerSaver = clearFileExplorerDiv(fileExplorer)
+            buildButtons(vaultTree, fileExplorer)
+            Array.from(fileExplorer.children).forEach(k => {
+                if (explorerSaver.includes(k.id)) { k.click() }
+            })     
         }
     })
 })
 
 const clearFileExplorerDiv = (fileExplorerDiv) => {
     let explorerSplit = Array.from(fileExplorerDiv.children)
+    let saveArray = []
     explorerSplit.forEach(i => {
+        if (i.classList.contains('open')) {saveArray.push(i.id)}
         if (i.id === 'file-explorer-tool-bar') {return}
         else {i.remove()}
     })
+    return saveArray
 }
