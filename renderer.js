@@ -123,11 +123,11 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
             })
             )
             folderName.remove()
+        let vaultTree = await window.api.getVaultTree()
+        clearFileExplorerDiv(fileExplorer)
+        buildButtons(vaultTree, fileExplorer)       
         }
     })
-    let vaultTree = await window.api.getVaultTree()
-    clearFileExplorerDiv(fileExplorer)
-    buildButtons(vaultTree, fileExplorer)
 })
 
 const clearFileExplorerDiv = (fileExplorerDiv) => {

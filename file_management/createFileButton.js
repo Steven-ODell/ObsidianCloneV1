@@ -7,8 +7,9 @@ const createNewFileButton = (fileName, inputBox, selectedPath) => {
     newFileButton.className = "fileButton"
     newFileButton.id = "button" + fileName
     newFileButton.innerHTML = `<svg class="fileSVG" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 15 15" fill="none" stroke="whitesmoke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="5" y1="7.5" x2="10" y2="7.5" />
-                                </svg>` + fileName
+                                <path d="M 4 2 V 13 H 11 V 5 L 8 2 Z" />
+                                <polyline points="8 2 8 5 11 5" />
+                                </svg>` + " " + fileName
     /* The stopPropagation was needed to stop from collapsing to the root folder
     always since the buttons sit in file-explorer div which changes path to root upon click */
     newFileButton.onclick = async (e) => {
