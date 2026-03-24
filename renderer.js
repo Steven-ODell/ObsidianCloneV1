@@ -36,8 +36,10 @@ const buildButtons = (treeArray, containerDiv) => {
             folderButton.addEventListener('click', () => {
                 if (folderWrapperDiv.style.display === 'none') {
                     folderWrapperDiv.style.display = 'block'
+                    folderButton.style.backgroundColor = "rgb(19, 19, 19)"
                 } else {
                     folderWrapperDiv.style.display = 'none'
+                    folderButton.style.backgroundColor = "rgb(28, 28, 28)"
                 }
             })
             folderWrapperDiv.style.marginLeft = (i.depth * 10) + "px"

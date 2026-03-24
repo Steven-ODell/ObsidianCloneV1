@@ -190,7 +190,7 @@ mark {
 
 .folderButton {
     border-width: 0;
-    background-color: rgb(42, 18, 56);
+    background-color: rgb(28, 28, 28);
     color: rgb(238, 238, 238);
     padding-top: 2px;
     padding-bottom: 2px;
@@ -203,15 +203,22 @@ mark {
 }
 
 .folderButton:hover {
-    background-color: rgb(61, 40, 80)
+    background-color: rgb(19, 19, 19)
+}
+
+.folderButton .folderSVG {
+    transition: transform 0.2s ease;
+}
+
+.folderButton.open .folderSVG {
+    transform: rotate(90deg);
 }
 
 .fileButton {
     border-width: 0;
-    display: flex;
-    flex-direction: column;  
+
     width: 100%;
-    background-color: rgb(23, 23, 23);
+    background-color: rgb(28, 28, 28);
     color: rgb(238, 238, 238);
     padding-top: 2px;
     padding-bottom: 2px;
@@ -222,7 +229,7 @@ mark {
 }
 
 .fileButton:hover {
-    background-color: rgb(61, 40, 80)
+    background-color: rgb(19, 19, 19)
 }
 
 #main-editor-div-wrapper {
