@@ -80,7 +80,7 @@ mark {
 #save-file-top-bar {
     padding-top: 3px;
     position: relative;
-    left: 73vw;
+    margin-left: auto;
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
@@ -93,7 +93,6 @@ mark {
 #toggle-editor {
     padding-top: 3px;
     position: relative;
-    left: 73vw;
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
@@ -106,10 +105,10 @@ mark {
 #toggle-preview {
     padding-top: 3px;
     position: relative;
-    left: 73vw;
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
+    margin-right: 5px;
 }
 
 #toggle-preview:hover {
@@ -231,9 +230,29 @@ mark {
     background-color: rgb(19, 19, 19)
 }
 
+#editor-name-input-div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+#editor-name-input {
+    outline-color: rgb(68, 38, 95);
+    background-color: rgb(19, 19, 19);
+    color: rgb(118, 43, 230);
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgb(214, 214, 214);
+    font-size: 20px;
+    height: 30px;
+    padding-left: 15px;
+}
+
 #main-editor-div-wrapper {
     flex-grow: 1;
-    min-width: 300px;
+    min-height: 0;
+
     position: relative;
 }
 
