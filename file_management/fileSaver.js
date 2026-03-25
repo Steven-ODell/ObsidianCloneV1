@@ -5,22 +5,20 @@ let directoryFolder = vaultPath
 const fs = require('fs')
 const path = require('path')
 
-const saveFile = (documentString, selectedPath) => {
-    if (!documentString || documentString.trim() === "") return null
-    let documentSplit = documentString.split("\n")
-    if (documentSplit) {
-        let documentHeaderTitle = (documentSplit.at(0).substring(0, 40)) + ".md"
-        let cleanedTitle = cleanTitle(documentHeaderTitle)
-        filePath = path.join(selectedPath, cleanedTitle)
-        // Check if the file exists for duplicate. 
-        // If it exists clearly the file is taken so don't overwrite throw a dialog (in main.js)
-        if (!(fs.existsSync(filePath))) {
-            fs.writeFile(filePath, documentString, (err) => { if (err) console.log(err) })
-        }
-        else { return "duplicate" }
-        let fileButtonName = cleanedTitle.replace(".md", "")
-        return fileButtonName
+const saveFile = (inputTitle, documentString, selectedPath) => {
+    if (!inputTitle || inputTitle.trim() === "") return null
+    let documentHeaderTitle = inputTitle + ".md"
+    let cleanedTitle = cleanTitle(documentHeaderTitle)
+    filePath = path.join(selectedPath, cleanedTitle)
+    // Check if the file exists for duplicate. 
+    // If it exists clearly the file is taken so don't overwrite throw a dialog (in main.js)
+    if (!(fs.existsSync(filePath))) {
+        fs.writeFile(filePath, documentString, (err) => { if (err) console.log(err) })
     }
+    else { return "duplicate" }
+    let fileButtonName = cleanedTitle.replace(".md", "")
+    return fileButtonName
+    
 }
 module.exports = { saveFile }
 

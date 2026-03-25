@@ -45,8 +45,8 @@ app.whenReady().then(() => {
         return vaultTree
     })
 
-    ipcMain.handle("save-file", (event, textAreaContent, selectedPath) => {
-        const result = saveFile(textAreaContent, selectedPath)
+    ipcMain.handle("save-file", (event, inputTitle, textAreaContent, selectedPath) => {
+        const result = saveFile(inputTitle, textAreaContent, selectedPath)
         if (result === "duplicate") {
             dialog.showMessageBox({ message: "A file with that title already exists." })
             return "duplicate"

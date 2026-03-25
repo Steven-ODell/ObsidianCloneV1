@@ -14,16 +14,22 @@ const feToolBarNewFolderButton = document.getElementById("fe-new-folder");
 const sideToolBarNewFile = document.getElementById("tool-bar-new-file-button");
 const fileExplorer = document.getElementById("file-explorer");
 const saveFileTopBar = document.getElementById("save-file-top-bar");
+const inputTitle = document.getElementById("editor-name-input");
+let fileTitle = ""
 
 //Gets callback of vault tree to build the buttons with
 window.api.createTreeOnStart((event, vaultTree) => {
     buildButtons(vaultTree, fileExplorer)
 })
 
+inputTitle.addEventListener('input', () => {
+    fileTitle = inputTitle.value
+})
+
 const buildButtons = (treeArray, containerDiv) => {
     treeArray.forEach(i => {
         if (i.type === "File") {
-            containerDiv.append(createNewFileButton(i.name.replace(".md", ""), inputBox, i.path))
+            containerDiv.append(createNewFileButton(i.name, inputBox, i.path))
         }
         if (i.type === "Folder") {
             // create folder button, append to containerDiv
@@ -69,12 +75,13 @@ editorButton.addEventListener('click', () => {
 })
 
 sideToolBarNewFile.addEventListener('click', async () => {
-    const newFile = await window.api.saveFile(inputBox.value, selectedPath)
+    const newFile = await window.api.saveFile(fileTitle, inputBox.value, selectedPath)
     if (!newFile) return
     if (newFile === "duplicate") {
         return
     }
     inputBox.value = ""
+    inputTitle.value = ""
     fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
     
     let vaultTree = await window.api.getVaultTree()
@@ -92,12 +99,13 @@ fileExplorer.addEventListener('click', () => {
 feToolBarNewFileButton.addEventListener('click', async () => {
     /* Sending the signal to the Main.js through the IPC tunnel to 
     process the call which needs system access which is why this window.api is needed*/
-    const newFile = await window.api.saveFile(inputBox.value, selectedPath)
+    const newFile = await window.api.saveFile(fileTitle, inputBox.value, selectedPath)
     if (!newFile) return
     if (newFile === "duplicate") {
         return
     }
     inputBox.value = ""
+    inputTitle.value = ""
     fileExplorer.append(createNewFileButton(newFile, inputBox, selectedPath))
     
     let vaultTree = await window.api.getVaultTree()
@@ -116,6 +124,7 @@ to the path currently highlighted via selectedPath and the button that
 was temporary input gets deleted and new button created takes place. 
 Looks like seamless typing name and then create folder.
 */
+
 feToolBarNewFolderButton.addEventListener('click', async () => {
     const folderName = document.createElement('input')
     folderName.className = "tempFolderNameInput"
@@ -130,7 +139,9 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
             })
             )
             folderName.remove()
-
+            /* Get the new file tree. check which folders are 'open' with clearFileExplorerDiv()
+            then add those to an array to later reopen them. Have buttons get built then go through 
+            each button and if it was saved in the list to be open then open them with {k.click()} */
             let vaultTree = await window.api.getVaultTree()
             let explorerSaver = clearFileExplorerDiv(fileExplorer)
             buildButtons(vaultTree, fileExplorer)
@@ -141,6 +152,7 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
     })
 })
 
+/* Create an array of the currently opened folders to then reopen them on the button refresh */
 const clearFileExplorerDiv = (fileExplorerDiv) => {
     let explorerSplit = Array.from(fileExplorerDiv.children)
     let saveArray = []
