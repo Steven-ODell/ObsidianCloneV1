@@ -4,7 +4,6 @@ import { blockParser } from "./parser/MainParserV3.js";
 import { createFolderButton } from "./file_management/createFolderButton.js";
 import { currentState } from "./state.js";
 
-
 const inputBox = document.getElementById("main-editor-text-area");
 const outputDiv = document.getElementById("main-editor-div");
 const previewButton = document.getElementById("toggle-preview");
@@ -82,7 +81,7 @@ sideToolBarNewFile.addEventListener('click', async () => {
 })
 
 fileExplorer.addEventListener('click', () => {
-    currentState.activeFolder = '/Users/Steven/Desktop/Learning to Code 2026/JS/ElectronProjects/ObsidianCloneV1/TestVault'
+    currentState.activeFolder = '/Users/Steven/Desktop/my-obsidian-vault'
 })
 
 feToolBarNewFileButton.addEventListener('click', async () => {
@@ -137,7 +136,7 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
 
 const buildButtons = (treeArray, containerDiv) => {
     treeArray.forEach(i => {
-        if (i.type === "File") {
+        if (i.type === "File" || ".png") {
             containerDiv.append(createNewFileButton(i.name, inputBox, inputTitle, i.path, currentState))
         }
         if (i.type === "Folder") {
@@ -198,6 +197,11 @@ const renderFileExplorer = (currentState, fileExplorer) => {
 }
 
 const renderPreview = (currentState, inputBox) => {
+    if (currentState.activeTab.fileType === ".png") {
+        currentState.previewMode = true
+        outputDiv.innerHTML = `<img src="file://${currentState.activeTab.filePath}">`
+        return
+    }
     const rootReadyForRender = blockParser(inputBox.value)
     outputDiv.innerHTML = mdRenderer(rootReadyForRender)    
     if (currentState.previewMode === true) {
@@ -210,4 +214,5 @@ const renderPreview = (currentState, inputBox) => {
     inputBox.style.color = 'rgb(238, 238, 238)';
     inputBox.style.zIndex = 2;
     }
+    
 }

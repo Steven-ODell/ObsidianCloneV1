@@ -3,6 +3,7 @@ const path = require('path')
 
 const buildTree = (currentPath, depth) => {
     let currentTree = []
+    let pngTempHolder = []
     let folderArray = fs.readdirSync(currentPath)
     folderArray.forEach(i => {
         let fullPath = path.join(currentPath, i)
@@ -13,7 +14,14 @@ const buildTree = (currentPath, depth) => {
                 name: i,
                 depth: depth,
             })
-        } else {
+        } else if (i.endsWith(".png")) {
+            currentTree.push({
+                type: ".png",
+                path: fullPath,
+                name: i,
+                depth: depth,
+            })
+        } else if (fs.statSync(fullPath).isDirectory()) {
             currentTree.push({
                 type: "Folder",
                 path: fullPath,

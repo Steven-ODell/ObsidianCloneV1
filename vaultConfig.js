@@ -2,6 +2,6 @@
 you will have settings set up this path. once set up this path needs
 to go into ant saving function to update the current folder path you are nested in */
 
-const vaultPath = '/Users/Steven/Desktop/Learning to Code 2026/JS/ElectronProjects/ObsidianCloneV1/TestVault'
+const vaultPath = '/Users/Steven/Desktop/my-obsidian-vault'
 
 module.exports = { vaultPath }

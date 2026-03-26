@@ -14,10 +14,15 @@ const createNewFileButton = (fileName, inputBox, inputTitle, selectedPath, curre
     always since the buttons sit in file-explorer div which changes path to root upon click */
     newFileButton.onclick = async (e) => {
         e.stopPropagation()
-        if (!(fileName.endsWith(".md"))) {fileName = fileName + ".md"}
+        if (fileName.endsWith(".png")) {currentState.activeTab.fileType = ".png"}
+        if (!(fileName.endsWith(".md"))||!(fileName.endsWith(".png"))) {fileName = fileName + ".md"
+        }
+
+
         currentState.activeTab.fileTitle = fileName
         currentState.activeTab.filePath = selectedPath
-        currentState.activeTab.fileContent = await window.api.readFile(fileName, selectedPath)
+
+        if (currentState.activeTab.fileType === "File") {currentState.activeTab.fileContent = await window.api.readFile(fileName, selectedPath)}
         
         inputTitle.value = currentState.activeTab.fileTitle.replace(".md", "")
         inputTitle.dispatchEvent(new Event('input'))

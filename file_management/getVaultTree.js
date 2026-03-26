@@ -13,16 +13,24 @@ const getVaultTree = (currentPath, depth) => {
                 name: i,
                 depth: depth,
             })
-        } else {
+        } else if (i.endsWith(".png")) {
+            currentTree.push({
+                type: ".png",
+                path: fullPath,
+                name: i,
+                depth: depth,
+            })
+        } else if (fs.statSync(fullPath).isDirectory()) {
             currentTree.push({
                 type: "Folder",
                 path: fullPath,
                 name: i,
-                //increase depth for this iteration of tree building
+                //increase depth for folders to later add nesting indent
                 depth: depth + 1,
-                children: getVaultTree(fullPath, depth + 1),
+                children: buildTree(fullPath, depth + 1),
             })
         }
+
     })
     return currentTree
 }
