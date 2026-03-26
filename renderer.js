@@ -20,7 +20,6 @@ let fileTitle = ""
 window.api.createTreeOnStart((event, vaultTree) => {
     currentState.vaultTree = vaultTree
     buildButtons(currentState.vaultTree, fileExplorer)
-    console.log(currentState.vaultTree)
 })
 
 // Set-up on start up
@@ -37,7 +36,6 @@ inputBox.addEventListener('input', () => {
     currentState.activeTab.fileContent = inputBox.value
     currentState.activeTab.fileTitle = inputTitle.value
     renderPreview(currentState, inputBox)
-    console.log(currentState)
 })
 
 previewButton.addEventListener('click', () => {
@@ -49,7 +47,6 @@ previewButton.addEventListener('click', () => {
 editorButton.addEventListener('click', () => {
     currentState.previewMode = false
     renderPreview(currentState, inputBox)
-    console.log(currentState)
 })
 
 saveFileTopBar.addEventListener('click', async () => {
@@ -197,13 +194,17 @@ const renderFileExplorer = (currentState, fileExplorer) => {
 }
 
 const renderPreview = (currentState, inputBox) => {
+    let pngLoaded = false
     if (currentState.activeTab.fileType === ".png") {
         currentState.previewMode = true
-        outputDiv.innerHTML = `<img src="file://${currentState.activeTab.filePath}">`
+        outputDiv.innerHTML = `<img src="file://${encodeURI(currentState.activeTab.filePath)}">`
+        console.log("PNG PREVIEW CALLED")
+        pngLoaded = true
         return
     }
+
     const rootReadyForRender = blockParser(inputBox.value)
-    outputDiv.innerHTML = mdRenderer(rootReadyForRender)    
+    if (pngLoaded === false) {outputDiv.innerHTML = mdRenderer(rootReadyForRender)}
     if (currentState.previewMode === true) {
     inputBox.style.backgroundColor = 'transparent';
     inputBox.style.color = 'transparent';
