@@ -53,6 +53,20 @@ editorButton.addEventListener('click', () => {
     console.log(currentState)
 })
 
+saveFileTopBar.addEventListener('click', async () => {
+    /* Sending the signal to the Main.js through the IPC tunnel to 
+    process the call which needs system access which is why this window.api is needed*/
+    const newFile = await window.api.saveFile(currentState)
+    if (!newFile) return
+    if (newFile === "duplicate") {
+        return
+    }
+    fileExplorer.append(createNewFileButton(newFile, inputBox, inputTitle, currentState.activeFolder, currentState))
+    
+    currentState.vaultTree = await window.api.getVaultTree()
+    renderFileExplorer(currentState, fileExplorer) 
+})
+
 sideToolBarNewFile.addEventListener('click', async () => {
     const newFile = await window.api.saveFile(currentState)
     if (!newFile) return
@@ -120,6 +134,7 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
         }
     })
 })
+
 const buildButtons = (treeArray, containerDiv) => {
     treeArray.forEach(i => {
         if (i.type === "File") {
