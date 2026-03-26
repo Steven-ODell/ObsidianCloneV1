@@ -27,7 +27,7 @@ const getVaultTree = (currentPath, depth) => {
                 name: i,
                 //increase depth for folders to later add nesting indent
                 depth: depth + 1,
-                children: buildTree(fullPath, depth + 1),
+                children: getVaultTree(fullPath, depth + 1),
             })
         }
 
