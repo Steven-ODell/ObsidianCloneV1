@@ -30,6 +30,7 @@ inputBox.style.color = 'rgb(238, 238, 238)';
 inputBox.style.zIndex = 2;
 
 inputTitle.addEventListener('input', () => {
+    currentState.activeTab.fileTitle = inputTitle.value
     fileTitle = inputTitle.value
 })
 
@@ -60,7 +61,7 @@ sideToolBarNewFile.addEventListener('click', async () => {
     }
     inputBox.value = ""
     inputTitle.value = ""
-    fileExplorer.append(createNewFileButton(newFile, inputBox, currentState.activeFolder))
+    fileExplorer.append(createNewFileButton(newFile, inputBox, inputTitle, currentState.activeFolder, currentState))
     
     currentState.vaultTree = await window.api.getVaultTree()
     renderFileExplorer(currentState, fileExplorer)
@@ -80,7 +81,7 @@ feToolBarNewFileButton.addEventListener('click', async () => {
     }
     inputBox.value = ""
     inputTitle.value = ""
-    fileExplorer.append(createNewFileButton(newFile, inputBox, currentState.activeFolder))
+    fileExplorer.append(createNewFileButton(newFile, inputBox, inputTitle, currentState.activeFolder, currentState))
     
     currentState.vaultTree = await window.api.getVaultTree()
     renderFileExplorer(currentState, fileExplorer) 
@@ -123,7 +124,7 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
 const buildButtons = (treeArray, containerDiv) => {
     treeArray.forEach(i => {
         if (i.type === "File") {
-            containerDiv.append(createNewFileButton(i.name, inputBox, i.path))
+            containerDiv.append(createNewFileButton(i.name, inputBox, inputTitle, i.path, currentState))
         }
         if (i.type === "Folder") {
             // create folder button, append to containerDiv
@@ -147,6 +148,7 @@ const buildButtons = (treeArray, containerDiv) => {
             containerDiv.append(folderButton)
             buildButtons(i.children, folderWrapperDiv)
             containerDiv.append(folderWrapperDiv)
+            renderPreview(currentState, inputBox)
         }
     })
 }
