@@ -120,7 +120,6 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
         }
     })
 })
-
 const buildButtons = (treeArray, containerDiv) => {
     treeArray.forEach(i => {
         if (i.type === "File") {
@@ -136,9 +135,13 @@ const buildButtons = (treeArray, containerDiv) => {
             folderWrapperDiv.style.display = 'none'
             folderButton.addEventListener('click', () => {
                 if (folderWrapperDiv.style.display === 'none') {
+                    console.log("class is" + folderButton.classList)
+                    currentState.openFolders.push(folderButton.id)
                     folderWrapperDiv.style.display = 'block'
                     folderButton.style.backgroundColor = "rgb(19, 19, 19)"
                 } else {
+                    currentState.openFolders = currentState.openFolders.filter(id => id !== folderButton.id)
+                    console.log("class is" + folderButton.classList)
                     folderWrapperDiv.style.display = 'none'
                     folderButton.style.backgroundColor = "rgb(28, 28, 28)"
                 }
@@ -158,17 +161,23 @@ const clearFileExplorerDiv = (fileExplorerDiv) => {
     let explorerSplit = Array.from(fileExplorerDiv.children)
     let saveArray = []
     explorerSplit.forEach(i => {
-        if (i.classList.contains('open')) {saveArray.push(i.id)}
+        if (i.classList.contains('open')) {
+            saveArray.push(i.id)
+            // AI had to give me this next line. I understand it exists now 
+            // but there was no way i was going to know "nextElementSibling" existed
+            saveArray.push(...clearFileExplorerDiv(i.nextElementSibling))
+        }
         if (i.id === 'file-explorer-tool-bar') {return}
         else {i.remove()}
     })
     return saveArray
 }
 
-const renderFileExplorer = (currentState, fileExplorerDiv) => {
-    let explorerSaver = clearFileExplorerDiv(fileExplorerDiv)
-    buildButtons(currentState.vaultTree, fileExplorerDiv)
-    Array.from(fileExplorerDiv.children).forEach(k => {
+const renderFileExplorer = (currentState, fileExplorer) => {
+    let explorerSaver = clearFileExplorerDiv(fileExplorer)
+
+    buildButtons(currentState.vaultTree, fileExplorer)
+    fileExplorer.querySelectorAll('.folderButton').forEach(k => {
         if (explorerSaver.includes(k.id)) { k.click() }
     })   
 }
