@@ -33,3 +33,7 @@ So just to state upfront I am starting this with 7 weeks of self taught coding e
 - Special tab view for file explorer(Hover over tabs they flip to show .md visual)
 - Tabs to have work able to be returned to in background not only one file at a time
 
+# State system pivot
+
+(3/25/2026)
+So I am pivoting to a main "state" so that the project is more of a reactive project while making it easier to know what to display. This is basically *needed* to add tabs and it makes it easier for other parts of the program to know of the state by just passing the state object as a variable instead of 10+ unique variables I have to track. For debugging it also makes it a but easier to just print the current state and see what isn't aligning. That could be the display or the information expected to be in the state and it makes it easier to just print the object and then view the current state of it and find what is misaligned. 

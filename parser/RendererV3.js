@@ -19,7 +19,7 @@ const rendererDict = [
     { type: "li", open: "<li>", close: "</li>" },
 ]
 
-const renderer = (inputRoot) => {
+const mdRenderer = (inputRoot) => {
 
     let finalString = ""
 
@@ -49,4 +49,4 @@ const renderer = (inputRoot) => {
     return finalString
 }
 
-export { renderer }
+export { mdRenderer }
