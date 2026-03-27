@@ -17,13 +17,16 @@ So just to state upfront I am starting this with 7 weeks of self taught coding e
 - Upon load create the file-explorer not just upon file creation within session
 - Folder SVG rotation up opening or closing
 - Save folder state after new file/folder creation
+- File title/name rework is now a separate bar like the old obsidian
+- Resizable file explorer
+- Mostly "state" based now with a few cleanup bits left
 
 ## List of features planned
 - AI Autocomplete for notes(Copilot for notes)
 - AI summary on right sidebar
 - AI plug in Local or API key
 - Doodler not as detailed as "excalidraw" but may be another 6 month project itself
-- Git implementation for a repo and push and pull from it
+- Git implementation for a repo and push and pull from it(possibly do a learning project for making a "gitcache" of last 3 saves and having those states and differences viewable)
 - Note connections node visual like Obsidian
 - Calendar button on the left side or a calendar always on right bar
 - A Trie prefix file search to start then eventually Fuzzy Matching to learn more :)

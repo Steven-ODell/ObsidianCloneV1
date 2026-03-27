@@ -27,6 +27,35 @@ inputBox.style.backgroundColor = 'rgb(19, 19, 19)';
 inputBox.style.color = 'rgb(238, 238, 238)';
 inputBox.style.zIndex = 2;
 
+// AI gave me this because i have never worked with resizing via JS using a div
+// and using a 'ew-resize" cursor to hav the cursor change and all that.
+// I understand it now I just didn't know half the things existed that are in it
+const resizeHandle = document.createElement('div');
+resizeHandle.className = 'file-explorer-resizer';
+fileExplorer.appendChild(resizeHandle);
+
+let isResizing = false;
+
+resizeHandle.addEventListener('mousedown', () => {
+    isResizing = true;
+    fileExplorer.style.flexGrow = '0';
+    fileExplorer.style.flexShrink = '0';
+    document.body.style.cursor = 'ew-resize';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isResizing) return;
+    const newWidth = e.clientX - 40; 
+    fileExplorer.style.width = `${newWidth}px`;
+    fileExplorer.style.maxWidth = 'none';
+});
+
+document.addEventListener('mouseup', () => {
+    isResizing = false;
+    document.body.style.cursor = 'default';
+});
+
+//Set up button and input event listeners
 inputTitle.addEventListener('input', () => {
     currentState.activeTab.fileTitle = inputTitle.value
     fileTitle = inputTitle.value
