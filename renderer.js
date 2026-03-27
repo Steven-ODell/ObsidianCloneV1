@@ -47,7 +47,7 @@ document.addEventListener('mousemove', (e) => {
     if (!isResizing) return;
     const newWidth = e.clientX - 40; 
     fileExplorer.style.width = `${newWidth}px`;
-    fileExplorer.style.maxWidth = 'none';
+    fileExplorer.style.maxWidth = '400px';
 });
 
 document.addEventListener('mouseup', () => {

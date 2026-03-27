@@ -143,18 +143,18 @@ mark {
     display: flex;
     flex-direction: column;
     position: relative;
-    width: auto;
-    max-width: 300px;
+    width: fit-content;
+    max-width: 270px;
     overflow: auto;
     overflow-y: scroll;
     border-right: 1px solid rgb(61, 28, 91);
     flex-grow: 1;
     min-height: 0;
-
+    max-height: 94vh;
 }
 
 .file-explorer-resizer {
-    width: 2px;
+    width: 5px;
     cursor: ew-resize;
     position: absolute;
     right: 0;
@@ -298,7 +298,7 @@ mark {
     padding: 10px;
     border: none;
     outline: none;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: monospace;
 }
 
 #main-editor-div {
@@ -314,7 +314,7 @@ mark {
     font-size: 16px;
     padding: 10px;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: monospace;
 }
 
 #right-side-bar {
