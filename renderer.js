@@ -11,6 +11,7 @@ const editorButton = document.getElementById("toggle-editor");
 const feToolBarNewFileButton = document.getElementById("fe-new-file");
 const feToolBarNewFolderButton = document.getElementById("fe-new-folder");
 const sideToolBarNewFile = document.getElementById("tool-bar-new-file-button");
+const sideToolBarExplorerToggle = document.getElementById("file-explorer-button")
 const fileExplorer = document.getElementById("file-explorer");
 const saveFileTopBar = document.getElementById("save-file-top-bar");
 const inputTitle = document.getElementById("editor-name-input");
@@ -76,6 +77,13 @@ previewButton.addEventListener('click', () => {
 editorButton.addEventListener('click', () => {
     currentState.previewMode = false
     renderPreview(currentState, inputBox)
+})
+
+sideToolBarExplorerToggle.addEventListener('click', () => {
+    if (currentState.leftSidebarOpen === true) {
+    currentState.leftSidebarOpen = false
+  } else {currentState.leftSidebarOpen = true}
+  renderFileExplorer(currentState, fileExplorer)
 })
 
 saveFileTopBar.addEventListener('click', async () => {
@@ -220,7 +228,16 @@ const renderFileExplorer = (currentState, fileExplorer) => {
     fileExplorer.querySelectorAll('.folderButton').forEach(k => {
         if (explorerSaver.includes(k.id)) { k.click() }
     })   
+    if (currentState.leftSidebarOpen === true) {
+    fileExplorer.style.overflow = "auto"
+    fileExplorer.style.width = "250px"
+    } 
+    else {
+    fileExplorer.style.width = "0px"
+    fileExplorer.style.overflow = "hidden"
+  }
 }
+
 
 const renderPreview = (currentState, inputBox) => {
     let pngLoaded = false
