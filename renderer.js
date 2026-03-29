@@ -15,6 +15,7 @@ const sideToolBarExplorerToggle = document.getElementById("file-explorer-button"
 const fileExplorer = document.getElementById("file-explorer");
 const saveFileTopBar = document.getElementById("save-file-top-bar");
 const inputTitle = document.getElementById("editor-name-input");
+const fileExplorerMiniCloserCorner = document.getElementById("close-file-explorer-button");
 let fileTitle = ""
 
 //Gets callback of vault tree to build the buttons with
@@ -83,6 +84,11 @@ sideToolBarExplorerToggle.addEventListener('click', () => {
     if (currentState.leftSidebarOpen === true) {
     currentState.leftSidebarOpen = false
   } else {currentState.leftSidebarOpen = true}
+  sideToolBarFEToggle(currentState, fileExplorer)
+})
+
+fileExplorerMiniCloserCorner.addEventListener('click', () => {
+  currentState.leftSidebarOpen = false
   sideToolBarFEToggle(currentState, fileExplorer)
 })
 
