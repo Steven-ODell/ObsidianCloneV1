@@ -44,7 +44,7 @@ const mdRenderer = (inputRoot) => {
             })
         }
         finalString += blockLabel.close // Add HTML block closer
-        console.log(finalString)
+//        console.log(finalString)
     })
     return finalString
 }

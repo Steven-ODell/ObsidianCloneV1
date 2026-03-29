@@ -41,10 +41,10 @@ app.whenReady().then(() => {
     MainParserV3.js from a button it gets executed here. IPC preload was the tunnel to set
     that up so main can talk to the specific browser calls*/
 
-    ipcMain.handle('delete-file', (event, filePath) => {
-        let response = deleteFile(filePath)
+    ipcMain.handle('delete-file', async (event, filePath) => {
+        let response = await deleteFile(filePath)
         if (response === "trigger-popup") {
-            dialog.showMessageBox({message: `A file at ${filePath} doesnt exist\nSilly ;)`})
+            dialog.showMessageBox({message: `A file at ${filePath} doesnt exist`})
         }
         return response
     })

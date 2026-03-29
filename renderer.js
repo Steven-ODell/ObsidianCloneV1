@@ -97,6 +97,11 @@ deleteFileButtonTopBar.addEventListener('click', async () => {
    let response = await window.api.deleteFile(currentState)
    currentState.activeTab.fileContent = ""
    currentState.activeTab.fileTitle = ""
+   currentState.previewMode = false
+   inputBox.value = ""
+   inputTitle.value = ""
+   currentState.vaultTree = await window.api.getVaultTree()
+   renderPreview(currentState, inputBox)
    renderFileExplorer(currentState, fileExplorer)
 })
 

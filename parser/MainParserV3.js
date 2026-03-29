@@ -46,7 +46,7 @@ const blockParser = (inputString) => {
         }
     })
     root = inlineParser(root) // send root off to parse for inline items 
-    console.log("Tree is:\n" + JSON.stringify(root, null, 2))
+//    console.log("Tree is:\n" + JSON.stringify(root, null, 2))
     return root // send tree back to be sent the renderer
 }
 
