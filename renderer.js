@@ -16,6 +16,7 @@ const fileExplorer = document.getElementById("file-explorer");
 const saveFileTopBar = document.getElementById("save-file-top-bar");
 const inputTitle = document.getElementById("editor-name-input");
 const fileExplorerMiniCloserCorner = document.getElementById("close-file-explorer-button");
+const deleteFileButtonTopBar = document.getElementById("top-bar-delete-file");
 let fileTitle = ""
 
 //Gets callback of vault tree to build the buttons with
@@ -90,6 +91,13 @@ sideToolBarExplorerToggle.addEventListener('click', () => {
 fileExplorerMiniCloserCorner.addEventListener('click', () => {
   currentState.leftSidebarOpen = false
   sideToolBarFEToggle(currentState, fileExplorer)
+})
+
+deleteFileButtonTopBar.addEventListener('click', async () => {
+   let response = await window.api.deleteFile(currentState)
+   currentState.activeTab.fileContent = ""
+   currentState.activeTab.fileTitle = ""
+   renderFileExplorer(currentState, fileExplorer)
 })
 
 saveFileTopBar.addEventListener('click', async () => {
@@ -236,15 +244,18 @@ const renderFileExplorer = (currentState, fileExplorer) => {
     })   
 }
 
-const sideToolBarFEToggle = (currentState, fileExplorer) => {
+const sideToolBarFEToggle = async (currentState, fileExplorer) => {
      fileExplorer.classList.add('collapsing')
 
      if (currentState.leftSidebarOpen === true) {
-        fileExplorer.style.width = "220px";
+        fileExplorer.style.width = "240px";
         fileExplorer.style.flexGrow = "0";
         fileExplorer.style.borderRight = "1px solid rgb(61, 28, 91)";
         fileExplorer.style.overflow = "auto"; 
+        await new Promise(resolve => setTimeout(resolve, 115))
+        fileExplorer.style.minWidth = "185px";
     } else {
+        fileExplorer.style.minWidth = "0px";
         fileExplorer.style.width = "0px";
         fileExplorer.style.flexGrow = "0";
         fileExplorer.style.borderRight = "none";
@@ -279,3 +290,5 @@ const renderPreview = (currentState, inputBox) => {
     }
     
 }
+
+ 

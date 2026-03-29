@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron/main')
 
 const fs = require('fs')
 const path = require('path')
+const { deleteFile } = require('./file_management/deleteCurrentFile.js')
 const { buildTree } = require('./file_management/fileExplorerBuilder')
 const { vaultPath } = require('./vaultConfig')
 const { saveFile } = require('./file_management/fileSaver')
@@ -39,6 +40,14 @@ app.whenReady().then(() => {
     talk to the system via Main.js. When a function is called like save-file in 
     MainParserV3.js from a button it gets executed here. IPC preload was the tunnel to set
     that up so main can talk to the specific browser calls*/
+
+    ipcMain.handle('delete-file', (event, filePath) => {
+        let response = deleteFile(filePath)
+        if (response === "trigger-popup") {
+            dialog.showMessageBox({message: `A file at ${filePath} doesnt exist\nSilly ;)`})
+        }
+        return response
+    })
 
     ipcMain.handle('get-vault-tree', (event, vaultTree) => {
         vaultTree = getVaultTree(vaultPath, 0)

@@ -64,23 +64,22 @@ mark {
     transform: translateY(-50%);
 }
 
-#top-bar-new-file {
+#top-bar-delete-file {
     padding-top: 3px;
     position: relative;
-    left: 73vw;
+    margin-left: auto;
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
 }
 
-#top-bar-new-file:hover {
-    background-color: rgb(31, 31, 31)
+#top-bar-delete-file:hover {
+  background-color: rgb(31, 31, 31)
 }
 
 #save-file-top-bar {
     padding-top: 3px;
     position: relative;
-    margin-left: auto;
     border-radius: 5px;
     border-width: 0;
     background-color: rgb(16, 16, 16);
@@ -145,6 +144,7 @@ mark {
     position: relative;
     width: fit-content;
     max-width: 270px;
+    min-width: 185px;
     overflow: auto;
     overflow-y: scroll;
     border-right: 1px solid rgb(61, 28, 91);
@@ -154,8 +154,8 @@ mark {
 }
 
 .collapsing {
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                flex-grow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                flex-grow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
                 border-right 0.1s ease;
 }
 
@@ -262,23 +262,6 @@ mark {
     background-color: rgb(19, 19, 19)
 }
 
-#close-file-explorer-button {
-  border-radius: 50%;
-  background-color: rgba(28, 28, 28, 0.7);
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  border: none;
-  padding-top: 3px;
-  width: 25;
-  height: 25;
-}
-
-#close-file-explorer-button:hover {
-  background-color: rgba(61, 28, 91, 0.7);
-  transition: 0.3s ease-in-out;
-}
-
 #editor-name-input-div {
     display: flex;
     flex-direction: column;
@@ -301,7 +284,6 @@ mark {
 #main-editor-div-wrapper {
     flex-grow: 1;
     min-height: 0;
-
     position: relative;
 }
 
@@ -321,7 +303,8 @@ mark {
     padding: 10px;
     border: none;
     outline: none;
-    font-family: monospace;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 }
 
 #main-editor-div {
@@ -337,7 +320,8 @@ mark {
     font-size: 16px;
     padding: 10px;
     box-sizing: border-box;
-    font-family: monospace;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 }
 
 #right-side-bar {
