@@ -1,13 +1,27 @@
 const inlineItems = [
+    { pattern: "***", regex: /(?<!\*)\*\*\*(?!\*)/, type: "strongEm" },
+    { pattern: "**", regex: /(?<!\*)\*\*(?!\*)/, type: "strong" },
+    { pattern: "*", regex: /(?<!\*)\*(?!\*)/, type: "em" },
+    { pattern: "~~", regex: /(?<!~)\~\~(?![~])/, type: "del" },
+    { pattern: "~", regex: /(?<!~)~(?![~])/, type: "sub" },
+    { pattern: "^", regex: /(?<!\^)\^(?!\^)/, type: "sup" },
+    { pattern: "==", regex: /(?<!=)==(?!=)/, type: "mark" },
+    { pattern: "`", regex: /(?<!`)[`](?!`)/, type: "code" }
+]
+
+/*const inlineItems = [
     { pattern: "***", type: "strongEm" },
     { pattern: "**", type: "strong" },
     { pattern: "*", type: "em" },
-    { pattern: "~~", type: "del" },
-    { pattern: "~", type: "sub" },
+
+@@ -7,39 +18,47 @@ const inlineItems = [
     { pattern: "^", type: "sup" },
     { pattern: "==", type: "mark" },
     { pattern: "`", type: "code" }
 ]
+]*/
+
+//TODO This entire function
 
 const inlineParser = (inputRoot) => {
 

@@ -25,7 +25,7 @@ const createWindow = () => {
         win.webContents.send('vault-start-load-tree', vaultTree)
     })
 
-    //win.webContents.openDevTools()
+    win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {

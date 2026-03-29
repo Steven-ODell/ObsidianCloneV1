@@ -83,7 +83,7 @@ sideToolBarExplorerToggle.addEventListener('click', () => {
     if (currentState.leftSidebarOpen === true) {
     currentState.leftSidebarOpen = false
   } else {currentState.leftSidebarOpen = true}
-  renderFileExplorer(currentState, fileExplorer)
+  sideToolBarFEToggle(currentState, fileExplorer)
 })
 
 saveFileTopBar.addEventListener('click', async () => {
@@ -228,16 +228,26 @@ const renderFileExplorer = (currentState, fileExplorer) => {
     fileExplorer.querySelectorAll('.folderButton').forEach(k => {
         if (explorerSaver.includes(k.id)) { k.click() }
     })   
-    if (currentState.leftSidebarOpen === true) {
-    fileExplorer.style.overflow = "auto"
-    fileExplorer.style.width = "250px"
-    } 
-    else {
-    fileExplorer.style.width = "0px"
-    fileExplorer.style.overflow = "hidden"
-  }
 }
 
+const sideToolBarFEToggle = (currentState, fileExplorer) => {
+     fileExplorer.classList.add('collapsing')
+
+     if (currentState.leftSidebarOpen === true) {
+        fileExplorer.style.width = "220px";
+        fileExplorer.style.flexGrow = "0";
+        fileExplorer.style.borderRight = "1px solid rgb(61, 28, 91)";
+        fileExplorer.style.overflow = "auto"; 
+    } else {
+        fileExplorer.style.width = "0px";
+        fileExplorer.style.flexGrow = "0";
+        fileExplorer.style.borderRight = "none";
+        fileExplorer.style.overflow = "hidden";
+    }
+    setTimeout(() => {
+          fileExplorer.classList.remove('collapsing');
+      }, 300);
+}
 
 const renderPreview = (currentState, inputBox) => {
     let pngLoaded = false
