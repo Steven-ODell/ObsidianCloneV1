@@ -24,87 +24,24 @@ const inlineItems = [
 //TODO This entire function
 
 const inlineParser = (inputRoot) => {
+  /*Goal here is to take a chunk of text and find its parent wrapper. As in when you type "*" you will find all 
+  that and wrap it in a label that says what type it is and then parse it again for any more sybols within it.
+  if it has any sybols within it do the same for those symbols. Recurssion. */
 
-    inputRoot.forEach(node => {
-        let currentValue = node.value
-        node.value = ""
-
-        while (currentValue.length > 0) { // Keep checking the block until it is gone
-            let earliestPos = Infinity
-            let earliestPattern = null
-
-            inlineItems.forEach(i => { // Find the first iteration of a pattern 
-                let idx = currentValue.indexOf(i.pattern)
-                if (idx !== -1 && idx < earliestPos) {
-                    earliestPos = idx
-                    earliestPattern = i
-                }
-            })
-
-            if (!earliestPattern) { // If no pattern found just add value as "inlineText" then break the loop
-                if (currentValue.length > 0) {
-                    node.children.push({
-                        type: "inlineText",
-                        value: currentValue,
-                        nestLevel: 1,
-                        children: []
-                    })
-                }
-                break
-            }
-
-            let startPatternPos = earliestPos
-            let closingPatternPos = currentValue.indexOf(earliestPattern.pattern, startPatternPos + earliestPattern.pattern.length)
-
-            if (closingPatternPos === -1) { // Check for no closing pattern. If not found send remaining string as inlineText and break probably end of the line
-                node.children.push({
-                    type: "inlineText",
-                    value: currentValue,
-                    nestLevel: 1,
-                    children: []
-                })
-                break
-            }
-
-            // Set values to be sent in the next objects
-            let patternValue = currentValue.substring(startPatternPos, closingPatternPos)
-            let patternValueMinusPattern = patternValue.replace(earliestPattern.pattern, "")
-
-            let currentValueStart = currentValue.substring(0, startPatternPos)
-            let currentValueSubstring = currentValue.substring(closingPatternPos, Infinity)
-            let currentValueRemainder = currentValueSubstring.replace(patternValue, "").replace(earliestPattern.pattern, "")
-
-            // Set object to be the pattern with its value minus the pattern to add the current inlineItem to the tree
-            let childObject = {
-                type: earliestPattern.type,
-                value: patternValueMinusPattern,
-                nestLevel: 1,
-                children: []
-            }
-
-            if (currentValueStart.length > 0) { // Set the child object to the prefix if it exists then push it 
-                node.children.push({
-                    type: "inlineText",
-                    value: currentValueStart,
-                    nestLevel: 1,
-                    children: []
-                })
-            }
-
-            /*TODO MAKE THIS WORK
-            if (node.children.at(-1).type === "ol" || node.children.at(-1).type === "ul") {
-                    node.children.at(-1).children.push({  //HOW DO I MAKE THIS THE CHILD PUSH NOT THE PARENT??
-                    type: "li", 
-                    value: currentValue, 
-                    nestLevel: 2, 
-                    children: [] 
-                })
-            }
-            */
-            node.children.push(childObject)
-            currentValue = currentValueRemainder
-        }
-    })
+  //inputRoot is an array of Header siblings all with the content they hold which contains all 
+  //including the patters but it will possibly be from recurssion so sating from header is incorrect
+  //Difficult part will be getting the recursion to happen on an array unless i make a a smaller one which just takes in remaining
+  //but then it wont know pattern types. but then i also need ther to be the abiity to make full patterns. i may be able to referenece
+  //the past branch and reuse most and rethink the recursion and how that effects the array going in or how im processing the incoming data.
+  //The problem is i need to be passing in a string. i also need to be walking each character. checking the next and last. i may even just
+  //call it at ** and ~~ and realisitically and i am never going to use *** so i can maybe just do a look one ahead parser for the patterns.
+  //i think that is a good comproise and may actually not be as hard to add another one token ahead if i make this correctly. 
+  //lets start
+  //
+  // 1 i have to take the root which is an arrey
+  // 2 Take that line find first pattern then add suffix to inlineText
+  // 3 take remaining string walk through it checking each. if you find something equal to you then check next character
+  // 4 if that character is the same then s
     return inputRoot
 }
 
