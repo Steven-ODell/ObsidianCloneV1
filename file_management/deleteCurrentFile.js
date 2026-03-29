@@ -5,7 +5,6 @@ const deleteFile = async (currentState) => {
     try {
         await fs.access(currentPath)
         await fs.unlink(currentPath)
-        console.log(`File deleted`)
         return "file-deleted"
     } catch (e) {
         return "trigger-popup"

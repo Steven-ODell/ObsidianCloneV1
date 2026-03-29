@@ -95,11 +95,14 @@ fileExplorerMiniCloserCorner.addEventListener('click', () => {
 
 deleteFileButtonTopBar.addEventListener('click', async () => {
    let response = await window.api.deleteFile(currentState)
+  console.log(response)
    currentState.activeTab.fileContent = ""
    currentState.activeTab.fileTitle = ""
    currentState.previewMode = false
+  
    inputBox.value = ""
    inputTitle.value = ""
+
    currentState.vaultTree = await window.api.getVaultTree()
    renderPreview(currentState, inputBox)
    renderFileExplorer(currentState, fileExplorer)
@@ -257,6 +260,8 @@ const sideToolBarFEToggle = async (currentState, fileExplorer) => {
         fileExplorer.style.flexGrow = "0";
         fileExplorer.style.borderRight = "1px solid rgb(61, 28, 91)";
         fileExplorer.style.overflow = "auto"; 
+    //AI Helped with this line massively i knew i needed a timer but not how to make opened
+    //essentilly this is an await create timeset in godot if im rememebrin properely
         await new Promise(resolve => setTimeout(resolve, 115))
         fileExplorer.style.minWidth = "185px";
     } else {
