@@ -6,6 +6,7 @@ import { currentState } from "./state.js";
 
 const inputBox = document.getElementById("main-editor-text-area");
 const outputDiv = document.getElementById("main-editor-div");
+const editorWrapper = document.getElementById("main-editor-div-wrapper")
 const previewButton = document.getElementById("toggle-preview");
 const editorButton = document.getElementById("toggle-editor");
 const feToolBarNewFileButton = document.getElementById("fe-new-file");
@@ -17,7 +18,10 @@ const saveFileTopBar = document.getElementById("save-file-top-bar");
 const inputTitle = document.getElementById("editor-name-input");
 const fileExplorerMiniCloserCorner = document.getElementById("close-file-explorer-button");
 const deleteFileButtonTopBar = document.getElementById("top-bar-delete-file");
+const toggleSideBySideTopBar =  document.getElementById("toggle-split-view");
+
 let fileTitle = ""
+
 
 //Gets callback of vault tree to build the buttons with
 window.api.createTreeOnStart((event, vaultTree) => {
@@ -93,6 +97,18 @@ fileExplorerMiniCloserCorner.addEventListener('click', () => {
   sideToolBarFEToggle(currentState, fileExplorer)
 })
 
+toggleSideBySideTopBar.addEventListener('click', () => {
+  if (currentState.sidePreviewMode === false){
+      currentState.rightSidebarOpen = false
+      currentState.sidePreviewMode = true
+      currentState.previewMode = false
+  } else {
+    currentState.sidePreviewMode = false
+    currentState.previewMode = true
+  }
+  renderPreview(currentState, inputBox)
+})
+
 deleteFileButtonTopBar.addEventListener('click', async () => {
    let response = await window.api.deleteFile(currentState)
   console.log(response)
@@ -128,6 +144,7 @@ sideToolBarNewFile.addEventListener('click', async () => {
     if (newFile === "duplicate") {
         return
     }
+
     inputBox.value = ""
     inputTitle.value = ""
     fileExplorer.append(createNewFileButton(newFile, inputBox, inputTitle, currentState.activeFolder, currentState))
@@ -148,6 +165,7 @@ feToolBarNewFileButton.addEventListener('click', async () => {
     if (newFile === "duplicate") {
         return
     }
+
     inputBox.value = ""
     inputTitle.value = ""
     fileExplorer.append(createNewFileButton(newFile, inputBox, inputTitle, currentState.activeFolder, currentState))
@@ -170,10 +188,12 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
     folderName.className = "tempFolderNameInput"
     fileExplorer.append(folderName)
     folderName.focus()
+
     folderName.addEventListener('keydown', async (e) => {
         if (e.key === 'Enter') {
             if (folderName.value === "") { return }
             const fullPath = await window.api.createFolder(currentState.activeFolder, folderName.value)
+      
             fileExplorer.append(createFolderButton(folderName.value, fullPath, (newPath) => {
                 currentState.activeFolder = newPath
             })
@@ -192,18 +212,22 @@ feToolBarNewFolderButton.addEventListener('click', async () => {
 
 const buildButtons = (treeArray, containerDiv) => {
     treeArray.forEach(i => {
+
         if (i.type === "File" || ".png") {
             containerDiv.append(createNewFileButton(i.name, inputBox, inputTitle, i.path, currentState))
         }
+
         if (i.type === "Folder") {
             // create folder button, append to containerDiv
             let folderButton = createFolderButton(i.name, i.path, (newPath) => {
                 currentState.activeFolder = newPath
             })
+          
             let folderWrapperDiv = document.createElement('div')
             folderWrapperDiv.className = 'folder-wrapper-div'
             folderWrapperDiv.style.display = 'none'
             folderButton.addEventListener('click', () => {
+        
                 if (folderWrapperDiv.style.display === 'none') {
                     console.log("class is" + folderButton.classList)
                     currentState.openFolders.push(folderButton.id)
@@ -230,6 +254,7 @@ const buildButtons = (treeArray, containerDiv) => {
 const clearFileExplorerDiv = (fileExplorerDiv) => {
     let explorerSplit = Array.from(fileExplorerDiv.children)
     let saveArray = []
+  
     explorerSplit.forEach(i => {
         if (i.classList.contains('open')) {
             saveArray.push(i.id)
@@ -271,6 +296,7 @@ const sideToolBarFEToggle = async (currentState, fileExplorer) => {
         fileExplorer.style.borderRight = "none";
         fileExplorer.style.overflow = "hidden";
     }
+
     setTimeout(() => {
           fileExplorer.classList.remove('collapsing');
       }, 300);
@@ -278,6 +304,7 @@ const sideToolBarFEToggle = async (currentState, fileExplorer) => {
 
 const renderPreview = (currentState, inputBox) => {
     let pngLoaded = false
+
     if (currentState.activeTab.fileType === ".png") {
         currentState.previewMode = true
         outputDiv.innerHTML = `<img src="file://${encodeURI(currentState.activeTab.filePath)}">`
@@ -288,17 +315,44 @@ const renderPreview = (currentState, inputBox) => {
 
     const rootReadyForRender = blockParser(inputBox.value)
     if (pngLoaded === false) {outputDiv.innerHTML = mdRenderer(rootReadyForRender)}
+  
+    if (currentState.sidePreviewMode === true) {
+      currentState.previewMode = false
+      editorWrapper.style.display = "flex"
+      editorWrapper.style.flexDirection = "row"
+      outputDiv.style.position = "static"
+      inputBox.style.position = "static"
+      outputDiv.style.flexGrow = "1"
+      inputBox.style.flexGrow = "1"
+      inputBox.style.borderRight = "1px solid rgb(61, 28, 91)"
+      inputBox.style.flexGrow = "1"
+      inputBox.style.width = "auto"
+      outputDiv.style.width = "auto"
+      editorWrapper.style.position = "static"
+    } else {
+      editorWrapper.style.display = ""
+      editorWrapper.style.flexDirection = ""
+      outputDiv.style.position = "absolute"
+      inputBox.style.position = "absolute"
+      outputDiv.style.flexGrow = ""
+      inputBox.style.flexGrow = ""
+      inputBox.style.borderRight = "1px solid rgba(0, 0, 0, 0)"
+      inputBox.style.flexGrow = ""
+      inputBox.style.width = "100%"
+      outputDiv.style.width = "100%"
+      outputDiv.style.zIndex = 0
+      inputBox.style.zIndex = 2
+      editorWrapper.style.position = "relative"
+     }  
     if (currentState.previewMode === true) {
-    inputBox.style.backgroundColor = 'transparent';
-    inputBox.style.color = 'transparent';
-    inputBox.style.zIndex = 0;
-    }
-    else {
-    inputBox.style.backgroundColor = 'rgb(19, 19, 19)';
-    inputBox.style.color = 'rgb(238, 238, 238)';
-    inputBox.style.zIndex = 2;
-    }
-    
+      inputBox.style.backgroundColor = 'transparent';
+      inputBox.style.color = 'transparent';
+      inputBox.style.zIndex = 0;
+      outputDiv.style.zIndex = 2;
+    } else {
+      inputBox.style.backgroundColor = 'rgb(19, 19, 19)';
+      inputBox.style.color = 'rgb(238, 238, 238)';
+      inputBox.style.zIndex = 2;
+      outputDiv.style.zIndex = 0;
+  }
 }
-
- 

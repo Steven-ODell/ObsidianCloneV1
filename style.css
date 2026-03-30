@@ -89,6 +89,18 @@ mark {
     background-color: rgb(31, 31, 31)
 }
 
+#toggle-split-view {
+    padding-top: 3px;
+    position: relative;
+    border-radius: 5px;
+    border-width: 0;
+    background-color: rgb(16, 16, 16);
+}
+
+#toggle-split-view:hover {
+  background-color: rgb(31, 31, 31)
+}
+
 #toggle-editor {
     padding-top: 3px;
     position: relative;
@@ -284,6 +296,7 @@ mark {
 #main-editor-div-wrapper {
     flex-grow: 1;
     min-height: 0;
+    max-height: 94vh;
     position: relative;
 }
 
@@ -291,6 +304,7 @@ mark {
     position: absolute;
     top: 0;
     left: 0;
+    max-height: 94vh;
     width: 100%;
     height: 100%;
     background-color: rgb(19, 19, 19);
@@ -312,6 +326,7 @@ mark {
     top: 0;
     left: 0;
     width: 100%;
+    max-height: 94vh;
     height: 100%;
     background-color: rgb(19, 19, 19);
     color: rgb(238, 238, 238);
@@ -321,7 +336,6 @@ mark {
     padding: 10px;
     box-sizing: border-box;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
 }
 
 #right-side-bar {
