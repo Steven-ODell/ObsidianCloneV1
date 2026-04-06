@@ -9,5 +9,4 @@ contextBridge.exposeInMainWorld('api', {
     getVaultTree: () => ipcRenderer.invoke('get-vault-tree'),    
     deleteFile: (filePath) => ipcRenderer.invoke('delete-file', filePath),
 
-    createTreeOnStart: (callback) => ipcRenderer.on('vault-start-load-tree', callback),
-})
+    createTreeOnStart: (callback) => ipcRenderer.on('vault-start-load-tree', callback), })

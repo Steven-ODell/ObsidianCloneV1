@@ -27,6 +27,6 @@ let state = {
     leftSidebarOpen: true,
     rightSidebarOpen: true,
     rightSidebarTools: [], // For later when I have things to add to the side like summary and calander i will add them here to render them
-    activePlugins: [/*NodeLinks, Calendar, GitTree, AI Autocomplete*/],
+    activePlugins: [NodeLinks, Calendar, GitTree, AI Autocomplete],
 }
 */
