@@ -154,7 +154,7 @@ sideToolBarNewFile.addEventListener('click', async () => {
 })
 
 fileExplorer.addEventListener('click', () => {
-    currentState.activeFolder = '/Users/Steven/Desktop/my-obsidian-vault'
+    currentState.activeFolder = "/home/saoii/linux-Obsidian-Vault/my-obsidian-vault"
 })
 
 feToolBarNewFileButton.addEventListener('click', async () => {
@@ -326,8 +326,8 @@ const renderPreview = (currentState, inputBox) => {
       inputBox.style.flexGrow = "1"
       inputBox.style.borderRight = "1px solid rgb(61, 28, 91)"
       inputBox.style.flexGrow = "1"
-      inputBox.style.width = "auto"
-      outputDiv.style.width = "auto"
+      inputBox.style.width = "50%"
+      outputDiv.style.width = "50%"
       editorWrapper.style.position = "static"
     } else {
       editorWrapper.style.display = ""

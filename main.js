@@ -13,7 +13,8 @@ const createWindow = () => {
     const win = new BrowserWindow({
         width: 1200,
         height: 800,
-        // Initiate the preload when the window loads more details in preload
+        minWidth: 800,
+        minHeight: 600,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
