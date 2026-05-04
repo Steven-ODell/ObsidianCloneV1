@@ -154,7 +154,7 @@ sideToolBarNewFile.addEventListener('click', async () => {
 })
 
 fileExplorer.addEventListener('click', () => {
-    currentState.activeFolder = "/home/saoii/linux-Obsidian-Vault/my-obsidian-vault"
+    currentState.activeFolder = "/mnt/c/Users/Steven/Desktop/my-obsidian-vault/GitVault"
 })
 
 feToolBarNewFileButton.addEventListener('click', async () => {

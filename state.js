@@ -4,7 +4,7 @@ let currentState = {
     activeTab: {fileType: '', fileTitle: '', filePath: '', fileContent: '' ,nodeLinks: []},
     openTabs: [],
     openFolders: [],
-    activeFolder: "/home/saoii/linux-Obsidian-Vault/my-obsidian-vault",
+    activeFolder: "/mnt/c/Users/Steven/Desktop/my-obsidian-vault/GitVault",
     previewMode: false,
     sidePreviewMode: false,
     leftSidebarOpen: true,
